@@ -1,5 +1,5 @@
-import type { ApiResponse } from "../types/api";
-import type { User } from "../types/user_type";
+import type { ApiResponse } from "../../../types/api.type";
+import type { User } from "../../../types/user.type";
 
 
 // để type tạm thời, lúc tích hợp thì sửa lại thuộc tính sau

@@ -1,7 +1,16 @@
+import { useEffect } from "react";
+import { testApiConnection } from "./features/test-connection/test.connection";
+
 function App() {
-  return <div className="text-2xl">
-    Hello from react
-  </div>;
+  useEffect(() => {
+    testApiConnection();
+  }, []);
+
+  return (
+    <div>
+      <h1>Hello From React</h1>
+    </div>
+  );
 }
 
 export default App;
