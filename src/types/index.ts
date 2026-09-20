@@ -1,0 +1,1 @@
+// định nghĩa các type dùng chung
