@@ -1,16 +1,18 @@
 // MainLayout.tsx
 import { Outlet } from 'react-router-dom';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
 export default function MainLayout() {
-  return (
-    <div className="layout">
-      <header>Header / Navbar</header>
-      
-      <main>
-        <Outlet /> 
-      </main>
+    return (
+        <div className="flex min-h-screen flex-col">
+            <Header />
 
-      <footer>Footer</footer>
-    </div>
-  );
+            <main className="flex-1 bg-background">
+                <Outlet />
+            </main>
+
+            <Footer />
+        </div>
+    );
 }
