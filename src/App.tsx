@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { testApiConnection } from "./features/test-connection/test.connection";
+import { Outlet } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -7,9 +8,7 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Hello From React</h1>
-    </div>
+    <Outlet />
   );
 }
 
