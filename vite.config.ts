@@ -14,16 +14,14 @@ export default defineConfig({
     tailwindcss(),
     svgr({
       svgrOptions: {
-        // Tự động thay thế mã màu cố định thành currentColor
+        // Cấu hình thay đổi màu đen, foreground thành màu text để đổi màu svg 
         replaceAttrValues: {
           '#000': 'currentColor',
           '#000000': 'currentColor',
-          // thêm các mã màu gốc trong SVG của bạn nếu cần
+          'black': 'currentColor'
         },
-        // Hoặc xóa hoàn toàn thuộc tính fill/stroke cứng trong SVG
-        // icon: true, 
       },
-    }),
+    })
   ],
   resolve: {
     alias: {
