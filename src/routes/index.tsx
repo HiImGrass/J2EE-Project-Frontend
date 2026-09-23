@@ -7,6 +7,7 @@ import MainLayout from "@/layouts/MainLayout";
 import { RequireRole } from "./RequireRole";
 import AdminLayout from "@/layouts/AdminLayout";
 import DashboardPage from "@/pages/admin-pages/DashboardPage";
+import { ClassPage } from "@/pages/client-pages/ClassPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
             element: <MainLayout />,
             children: [
               { path: "/", element: <HomePage /> },
+              { path: "/student-classes", element: <ClassPage /> },
             ],
           },
           {
