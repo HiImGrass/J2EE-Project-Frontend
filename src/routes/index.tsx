@@ -8,6 +8,8 @@ import { RequireRole } from "./RequireRole";
 import AdminLayout from "@/layouts/AdminLayout";
 import DashboardPage from "@/pages/admin-pages/DashboardPage";
 import { ClassPage } from "@/pages/client-pages/ClassPage";
+import { HeaderOnlyLayout } from "@/layouts/HeaderOnlyLayout";
+import { JoinClassPage } from "@/pages/client-pages/JoinClassPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,12 +20,22 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            element: <MainLayout />,
+            element: <HeaderOnlyLayout />,
             children: [
-              { path: "/", element: <HomePage /> },
               { path: "/student-classes", element: <ClassPage /> },
+              {
+                path: '/join-class',
+                element: <JoinClassPage />,
+              }
             ],
           },
+          // { các thành phần giao diện khác sẽ nằm trong đây
+          //   element: <MainLayout />,
+          //   children: [
+          //     { path: "/", element: <HomePage /> },
+          //     { path: "/student-classes", element: <ClassPage /> },
+          //   ],
+          // },
           {
             path: "/admin",
             element: <RequireRole allowedRoles={["ADMIN", "TEACHER"]} />, // Tính năng cho TEACHER , ADMIN

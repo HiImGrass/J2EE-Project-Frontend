@@ -1,4 +1,7 @@
 import { ClassBox } from '../../features/student-classes/components/ClassBox';
+import { ImgButton } from '../../components/ui/ImgButton';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { useNavigate } from 'react-router-dom';
 
 const MockClasses = [
     {
@@ -58,6 +61,14 @@ const MockClasses = [
 ]
 
 export function ClassPage() {
+    const navigate = useNavigate();
+
+    const JoinClass = () => {
+        console.log("join") // xử lý logic join class ở đây
+
+        navigate("/join-class");
+    };
+
     return (
         <div className='flex flex-col p-3 gap-2'>
             {
@@ -72,6 +83,23 @@ export function ClassPage() {
                     )
                 })
             }
+            <div className='fixed bottom-6 right-6 z-50'>
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <ImgButton
+                            iconName='plus'
+                            className='text-white bg-primary p-4 rounded-lg'
+                        />
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent align="end" className="w-50">
+                        <DropdownMenuItem className="px-4 py-2 active:bg-accent" onClick={() => JoinClass()}>
+                            Tham gia lớp học mới
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
         </div>
     )
 }

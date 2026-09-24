@@ -1,5 +1,9 @@
 import { Icon } from './ui/icon';
-import { Image } from './ui/image';
+import { AccountAvatar } from './AccountAvatar';
+
+
+
+
 export function Header() {
     return (
         <div className='p-2 flex flex-row justify-between items-center w-full h-12'>
@@ -15,7 +19,8 @@ export function Header() {
             </div>
 
             <div>
-                <Image publicId='type_avatar_initials_eqexyi' />
+                <AccountAvatar/>
+
             </div>
         </div>
     )

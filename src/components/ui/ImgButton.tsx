@@ -6,7 +6,7 @@ import { Icon } from "./icon";
 
 //thiết kế variant cho size + vị trí của icon
 const buttonVariants = cva(
-    "cursor-pointer flex items-center",
+    "cursor-pointer flex items-center select-none",
     {
         variants: {
             iconPosition: {
@@ -43,7 +43,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Var
 export const ImgButton = (
     {
         type = 'button',
-        text = 'default',
+        text = '',
         iconName,
         iconPosition,
         iconSize = 'xs',
