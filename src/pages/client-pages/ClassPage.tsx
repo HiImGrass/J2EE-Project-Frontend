@@ -69,6 +69,10 @@ export function ClassPage() {
         navigate("/join-class");
     };
 
+    const NavToLearningPathPage = () => {
+        navigate("/student-learning-path")
+    }
+
     return (
         <div className='flex flex-col p-3 gap-2'>
             {
@@ -79,6 +83,7 @@ export function ClassPage() {
                             classId={item.id}
                             name={item.name}
                             teacherName={item.teacherName}
+                            onClick = {() => NavToLearningPathPage()}
                         />
                     )
                 })

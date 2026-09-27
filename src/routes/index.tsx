@@ -10,6 +10,9 @@ import DashboardPage from "@/pages/admin-pages/DashboardPage";
 import { ClassPage } from "@/pages/client-pages/ClassPage";
 import { HeaderOnlyLayout } from "@/layouts/HeaderOnlyLayout";
 import { JoinClassPage } from "@/pages/client-pages/JoinClassPage";
+import { LearningPathPage } from "@/pages/client-pages/LearningPathPage";
+import { PracticePage } from "@/pages/client-pages/PracticePage";
+import { NoteBookPage } from "@/pages/client-pages/NoteBookPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,13 +32,16 @@ export const router = createBrowserRouter([
               }
             ],
           },
-          // { các thành phần giao diện khác sẽ nằm trong đây
-          //   element: <MainLayout />,
-          //   children: [
-          //     { path: "/", element: <HomePage /> },
-          //     { path: "/student-classes", element: <ClassPage /> },
-          //   ],
-          // },
+          // các thành phần giao diện khác sẽ nằm trong đây
+          {
+            element: <MainLayout />,
+            children: [
+              { path: "/", element: <HomePage /> },
+              { path: "/student-learning-path", element: <LearningPathPage /> },
+              { path: "/student-practice", element: <PracticePage /> },
+              { path: "/student-notebook", element: <NoteBookPage /> },
+            ],
+          },
           {
             path: "/admin",
             element: <RequireRole allowedRoles={["ADMIN", "TEACHER"]} />, // Tính năng cho TEACHER , ADMIN
