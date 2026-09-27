@@ -1,6 +1,7 @@
 import { Input } from '@/components/ui/input';
 import { ImgButton } from '../../components/ui/ImgButton';
 import BackButton from '@/components/BackButton';
+import { useNavigate } from 'react-router-dom';
 
 const Title = "Tham gia lớp học";
 const Decsription = "Hỏi giáo viên của bạn để biết mã lớp rồi nhập mã đó vào đây.";
@@ -14,10 +15,17 @@ const Tutorial = {
 }
 
 export function JoinClassPage() {
+    const navigate = useNavigate();
+
+    const JoinClass = () => {
+        //logic xử lý join class
+        navigate("/student-learning-path");
+    }
+
     return (
         <div className='flex flex-col p-3 gap-6'>
             <div className="flex pt-1 gap-2 items-center">
-                <BackButton/>
+                <BackButton />
                 <div className='text-lg'>
                     {Title}
                 </div>
@@ -33,6 +41,7 @@ export function JoinClassPage() {
                 <ImgButton
                     text="Tham gia"
                     className='text-nowrap text-white bg-primary px-4 rounded-md active:bg-primary/80'
+                    onClick={() => JoinClass()}
                 />
             </div>
 

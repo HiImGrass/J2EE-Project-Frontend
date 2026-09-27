@@ -7,7 +7,6 @@
 
 @theme {
   /* custom theme nếu cần */
-
 }
 
 @layer base {
@@ -16,19 +15,16 @@
   }
   * {
     @apply border-border outline-ring/50;
-
   }
   html {
     @apply font-sans;
-
   }
 }
 
 @theme inline {
-
   --font-heading: var(--font-sans);
 
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
 
   --color-sidebar-ring: var(--sidebar-ring);
 
@@ -106,10 +102,12 @@
 
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  --color-green-background: var(--green-background);
+  
+  --color-light-green-background: var(--light-green-background);
 }
 
 :root {
-
   --background: oklch(1 0 0);
 
   --foreground: oklch(0.145 0 0);
@@ -174,10 +172,12 @@
 
   --sidebar-ring: oklch(0.708 0 0);
 
+  --light-green-background: oklch(0.6271 0.1699 149.21);
+
+  --green-background: oklch(0.5273 0.1371 150.07);
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
@@ -239,5 +239,4 @@
   --sidebar-border: oklch(1 0 0 / 10%);
 
   --sidebar-ring: oklch(0.556 0 0);
-
 }

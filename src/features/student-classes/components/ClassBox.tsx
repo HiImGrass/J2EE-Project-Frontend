@@ -6,13 +6,15 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 interface ClassBoxProp {
     classId: number,
     name: string,
-    teacherName: string
+    teacherName: string,
+    onClick: (classId: number) => void;
 }
 
 export function ClassBox({
     classId,
     name,
-    teacherName
+    teacherName,
+    onClick
 }: ClassBoxProp) {
     const classPublicId = getClassroomPublicId(classId);
 
@@ -25,7 +27,10 @@ export function ClassBox({
     }
 
     return (
-        <div className="relative w-full h-34 flex items-center justify-center overflow-hidden rounded-xl">
+        <div
+            className="group relative w-full h-34 flex items-center justify-center overflow-hidden rounded-xl"
+            onClick={() => onClick(classId)}
+        >
             {/* 1. Component Image đóng vai trò làm nền */}
             <Image
                 publicId={classPublicId}
@@ -42,7 +47,7 @@ export function ClassBox({
             <div className="w-full h-full px-4 py-4 flex flex-col justify-between text-white z-10">
                 <div className="w-full flex gap-2 justify-between items-center">
                     <div className="text-2xl truncate">{name}</div>
-                    
+
                     <DropdownMenu>
                         <DropdownMenuTrigger>
                             <ImgButton iconName="more-horizontal" text="" className="text-white" />
@@ -61,6 +66,9 @@ export function ClassBox({
                 </div>
                 <div>{teacherName}</div>
             </div>
+
+            {/* Lớp phủ mờ hiển thị khi active */}
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-active:opacity-100 transition-opacity duration-300 pointer-events-none z-10" />
         </div>
     );
 }
