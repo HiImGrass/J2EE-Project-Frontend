@@ -1,18 +1,20 @@
-import App from "@/App";
-import HomePage from "@/pages/client-pages/HomePage";
-import ErrorPage from "@/pages/ErrorPage";
-import { createBrowserRouter } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
-import MainLayout from "@/layouts/MainLayout";
-import { RequireRole } from "./RequireRole";
-import AdminLayout from "@/layouts/AdminLayout";
-import DashboardPage from "@/pages/admin-pages/DashboardPage";
-import { ClassPage } from "@/pages/client-pages/ClassPage";
-import { HeaderOnlyLayout } from "@/layouts/HeaderOnlyLayout";
-import { JoinClassPage } from "@/pages/client-pages/JoinClassPage";
-import { LearningPathPage } from "@/pages/client-pages/LearningPathPage";
-import { PracticePage } from "@/pages/client-pages/PracticePage";
-import { NoteBookPage } from "@/pages/client-pages/NoteBookPage";
+import App from '@/App'
+import HomePage from '@/pages/client-pages/HomePage'
+import ErrorPage from '@/pages/ErrorPage'
+import { createBrowserRouter } from 'react-router-dom'
+import ProtectedRoute from './ProtectedRoute'
+import MainLayout from '@/layouts/MainLayout'
+import { RequireRole } from './RequireRole'
+import AdminLayout from '@/layouts/AdminLayout'
+import DashboardPage from '@/pages/admin-pages/DashboardPage'
+import { ClassPage } from '@/pages/client-pages/ClassPage'
+import { HeaderOnlyLayout } from '@/layouts/HeaderOnlyLayout'
+import { JoinClassPage } from '@/pages/client-pages/JoinClassPage'
+import { LearningPathPage } from '@/pages/client-pages/LearningPathPage'
+import { PracticePage } from '@/pages/client-pages/PracticePage'
+import { NoteBookPage } from '@/pages/client-pages/NoteBookPage'
+import { LoginPage } from '@/pages/client-pages/LoginPage'
+import { RegisterPage } from '@/pages/client-pages/RegisterPage'
 
 export const router = createBrowserRouter([
   {
@@ -25,26 +27,26 @@ export const router = createBrowserRouter([
           {
             element: <HeaderOnlyLayout />,
             children: [
-              { path: "/student-classes", element: <ClassPage /> },
+              { path: '/student-classes', element: <ClassPage /> },
               {
                 path: '/join-class',
                 element: <JoinClassPage />,
-              }
+              },
             ],
           },
           // các thành phần giao diện khác sẽ nằm trong đây
           {
             element: <MainLayout />,
             children: [
-              { path: "/", element: <HomePage /> },
-              { path: "/student-learning-path", element: <LearningPathPage /> },
-              { path: "/student-practice", element: <PracticePage /> },
-              { path: "/student-notebook", element: <NoteBookPage /> },
+              { path: '/', element: <HomePage /> },
+              { path: '/student-learning-path', element: <LearningPathPage /> },
+              { path: '/student-practice', element: <PracticePage /> },
+              { path: '/student-notebook', element: <NoteBookPage /> },
             ],
           },
           {
-            path: "/admin",
-            element: <RequireRole allowedRoles={["ADMIN", "TEACHER"]} />, // Tính năng cho TEACHER , ADMIN
+            path: '/admin',
+            element: <RequireRole allowedRoles={['ADMIN', 'TEACHER']} />, // Tính năng cho TEACHER , ADMIN
             children: [
               {
                 element: <AdminLayout />,
@@ -52,18 +54,17 @@ export const router = createBrowserRouter([
                   { index: true, element: <DashboardPage /> }, // /admin
                   // Tính năng cho ADMIN
                   {
-                    element: <RequireRole allowedRoles={["ADMIN"]} />,
+                    element: <RequireRole allowedRoles={['ADMIN']} />,
                     children: [],
                   },
                 ],
               },
             ],
           },
-
         ],
       },
-      // { path: "/login", element: <LoginPage /> },
-      // { path: "/register", element: <RegisterPage /> }
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
     ],
   },
-]);
+])
