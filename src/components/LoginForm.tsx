@@ -16,12 +16,10 @@ export function LoginForm() {
 
   return (
     <div className="flex w-full flex-col items-center">
-      {/* Tiêu đề */}
       <h2 className="text-sm font-bold tracking-wider text-[#1c3aa9] uppercase">ĐĂNG NHẬP</h2>
       <p className="mt-1 mb-6 text-[13px] text-gray-500">Đăng nhập tài khoản học LA2P</p>
 
       <form onSubmit={handleSubmit} className="w-full space-y-3">
-        {/* Mã học viên */}
         <div>
           <Input
             id="login-student-id"
@@ -33,7 +31,6 @@ export function LoginForm() {
           />
         </div>
 
-        {/* Mật khẩu */}
         <div className="relative">
           <Input
             id="login-password"
@@ -88,7 +85,6 @@ export function LoginForm() {
           </button>
         </div>
 
-        {/* Quên mật khẩu */}
         <div className="flex justify-end">
           <Link
             to="#"
@@ -99,7 +95,6 @@ export function LoginForm() {
           </Link>
         </div>
 
-        {/* Nút Đăng nhập */}
         <button
           id="login-submit-btn"
           type="submit"
@@ -109,7 +104,6 @@ export function LoginForm() {
         </button>
       </form>
 
-      {/* Bắt đầu ngay */}
       <div className="mt-4 flex w-full justify-start text-[13px] text-gray-500">
         <span>Bạn chưa có tài khoản?</span>
         <Link
@@ -121,7 +115,6 @@ export function LoginForm() {
         </Link>
       </div>
 
-      {/* Divider Hoặc */}
       <div className="relative my-5 w-full text-center">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200"></div>
@@ -129,7 +122,6 @@ export function LoginForm() {
         <span className="relative bg-white px-3 text-[12px] text-gray-400">Hoặc</span>
       </div>
 
-      {/* Nút Google */}
       <button
         id="google-login-btn"
         type="button"

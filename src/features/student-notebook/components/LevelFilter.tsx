@@ -26,7 +26,7 @@ export function LevelFilter({
     };
 
     return (
-        <div className="flex flex-row border-b border-gray-200 w-full">
+        <div className="flex flex-row border-b border-gray-200 w-full select-none">
             {levels.map((level) => {
                 const isSelected = selectedLevel === level.id;
                 return (

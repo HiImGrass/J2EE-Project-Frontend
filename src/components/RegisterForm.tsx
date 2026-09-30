@@ -16,17 +16,15 @@ export function RegisterForm() {
       return
     }
     console.log('Dữ liệu đăng ký:', { studentId, password })
-    // API logic...
+    // API
   }
 
   return (
     <div className="flex w-full flex-col items-center">
-      {/* Tiêu đề */}
       <h2 className="text-sm font-bold tracking-wider text-[#1c3aa9] uppercase">ĐĂNG KÝ</h2>
       <p className="mt-1 mb-6 text-[13px] text-gray-500">Đăng ký tài khoản học LA2P</p>
 
       <form onSubmit={handleSubmit} className="w-full space-y-3">
-        {/* Mã học viên */}
         <div>
           <Input
             id="register-student-id"
@@ -38,7 +36,6 @@ export function RegisterForm() {
           />
         </div>
 
-        {/* Mật khẩu */}
         <div className="relative">
           <Input
             id="register-password"
@@ -91,7 +88,6 @@ export function RegisterForm() {
           </button>
         </div>
 
-        {/* Nhập lại mật khẩu */}
         <div className="relative">
           <Input
             id="register-confirm-password"
@@ -144,7 +140,6 @@ export function RegisterForm() {
           </button>
         </div>
 
-        {/* Nút Đăng ký ngay */}
         <button
           id="register-submit-btn"
           type="submit"
@@ -154,7 +149,6 @@ export function RegisterForm() {
         </button>
       </form>
 
-      {/* Đăng nhập ngay */}
       <div className="mt-4 flex w-full justify-start text-[13px] text-gray-500">
         <span>Bạn đã có tài khoản?</span>
         <Link
@@ -166,7 +160,6 @@ export function RegisterForm() {
         </Link>
       </div>
 
-      {/* Divider Hoặc */}
       <div className="relative my-5 w-full text-center">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200"></div>

@@ -1,9 +1,11 @@
 import { Image } from "@/components/ui/image";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import { useNavigate } from "react-router-dom";
 
 interface TopicCardProps {
-    order: number
+    topicId: number;
+    order: number;
     publicId: string;
     status: "LEARNED" | "UNLEARNED"
     title: string;
@@ -22,9 +24,17 @@ const topicCardVariants = cva("flex w-full px-5 py-4 rounded-xl gap-4 items-cent
     },
 });
 
-export function TopicCard({ order, publicId, status, title, meaning }: TopicCardProps) {
+export function TopicCard({ topicId, order, publicId, status, title, meaning }: TopicCardProps) {
+    const navigate = useNavigate();
+
+    const handleClickCard = () => {
+        navigate(`/study/${topicId}`)
+    }
     return (
-        <div className={cn(topicCardVariants({ status }))}>
+        <div
+            className={cn(topicCardVariants({ status }))}
+            onClick={() => handleClickCard()}
+        >
             <div className="size-18 rounded-full overflow-hidden outline-2 outline-white outline-offset-4">
                 <Image
                     publicId={publicId}

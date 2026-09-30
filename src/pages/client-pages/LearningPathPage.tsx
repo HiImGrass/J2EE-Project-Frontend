@@ -8,6 +8,7 @@ interface LearningPathPageProp {
 
 const Topics = [
     {
+        topicId: 1,
         order: 1,
         publicId: "topic_default_gzsqcq",
         status: "LEARNED",
@@ -15,6 +16,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 2,
         order: 2,
         publicId: "topic_default_gzsqcq",
         status: "LEARNED",
@@ -22,6 +24,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 3,
         order: 3,
         publicId: "topic_default_gzsqcq",
         status: "LEARNED",
@@ -29,6 +32,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 4,
         order: 4,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -36,6 +40,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 5,
         order: 5,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -43,6 +48,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 6,
         order: 6,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -50,6 +56,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 7,
         order: 7,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -57,6 +64,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 8,
         order: 8,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -64,6 +72,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 9,
         order: 9,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -71,6 +80,7 @@ const Topics = [
         meaning: "Trường học"
     },
     {
+        topicId: 10,
         order: 10,
         publicId: "topic_default_gzsqcq",
         status: "UNLEARNED",
@@ -101,7 +111,7 @@ export function LearningPathPage({
 
             </div>
 
-            <TitleLine title={"LỘ TRÌNH"}/>
+            <TitleLine title={"LỘ TRÌNH"} />
 
             <div className="flex flex-col w-full gap-4">
                 {
