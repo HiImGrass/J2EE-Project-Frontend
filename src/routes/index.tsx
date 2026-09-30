@@ -13,6 +13,10 @@ import { JoinClassPage } from "@/pages/client-pages/JoinClassPage";
 import { LearningPathPage } from "@/pages/client-pages/LearningPathPage";
 import { PracticePage } from "@/pages/client-pages/PracticePage";
 import { NoteBookPage } from "@/pages/client-pages/NoteBookPage";
+import { PracticeNotebookPage } from "@/pages/client-pages/PracticeNotebookPage";
+import { ArchivedNotebookPage } from "@/pages/client-pages/ArchivedNoteBookPage";
+import { StudyPage } from "@/pages/client-pages/StudyPage";
+import { DefaultLayout } from "@/layouts/DefaultLayout";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +36,15 @@ export const router = createBrowserRouter([
               }
             ],
           },
+          {
+            element: <DefaultLayout />,
+            children: [
+              {
+                path: 'study/:topic',
+                element: <StudyPage />
+              }
+            ]
+          },
           // các thành phần giao diện khác sẽ nằm trong đây
           {
             element: <MainLayout />,
@@ -40,6 +53,8 @@ export const router = createBrowserRouter([
               { path: "/student-learning-path", element: <LearningPathPage /> },
               { path: "/student-practice", element: <PracticePage /> },
               { path: "/student-notebook", element: <NoteBookPage /> },
+              { path: '/practice-notebook', element: <PracticeNotebookPage /> },
+              { path: '/archived-notebook', element: <ArchivedNotebookPage /> }
             ],
           },
           {

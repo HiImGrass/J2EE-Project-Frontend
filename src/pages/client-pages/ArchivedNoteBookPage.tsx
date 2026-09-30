@@ -3,14 +3,13 @@ import BackButton from '../../components/BackButton';
 import LevelFilter from '../../features/student-notebook/components/LevelFilter';
 import { ImgButton } from '../../components/ui/ImgButton';
 import VocabularyCard from '@/features/student-notebook/components/VocabularyCard';
-export function PracticeNotebookPage() {
-
+export function ArchivedNotebookPage() {
     return (
         <div className="flex flex-col h-full items-center p-3 gap-3">
             <div className="flex w-full gap-2">
                 <BackButton />
                 <div className="text-xl font-semibold">
-                    Sổ tay ôn tập
+                    Sổ tay ngủ đông
                 </div>
             </div>
 
@@ -27,7 +26,7 @@ export function PracticeNotebookPage() {
                 />
                 <ImgButton
                     className='rounded-md bg-gray-400 px-5 text-white active:bg-gray-400/80 text-nowrap'
-                    text='Lưu trữ'
+                    text='Ôn lại'
                 />
             </div>
             <VocabularyCard />
