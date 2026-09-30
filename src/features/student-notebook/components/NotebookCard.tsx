@@ -6,6 +6,7 @@ type NotebookType = "onTap" | "nguDong";
 interface NotebookCardProps {
     count: number;
     type?: NotebookType;
+    onClick: () => void;
 }
 
 const TYPE_CONFIG: Record<NotebookType, {
@@ -32,11 +33,15 @@ export const NotebookCard = (
     {
         count = 15,
         type = "onTap",
+        onClick,
     }: NotebookCardProps
 ) => {
     const config = TYPE_CONFIG[type];
     return (
-        <div className={`w-full h-60 relative group rounded-2xl border-2 ${config.borderColor} shadow-lg overflow-hidden`}>
+        <div
+            className={`w-full h-60 relative group rounded-2xl border-2 ${config.borderColor} shadow-lg overflow-hidden`}
+            onClick={() => onClick()}
+        >
             <Image
                 publicId={config.publicId}
                 aspect="square"
