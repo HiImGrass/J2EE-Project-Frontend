@@ -54,6 +54,7 @@ export function StudyPage() {
 
     const total = WORDS.length;
     const finished = index >= total;
+
     const current = WORDS[index];
 
     const handleTransitionDone = useCallback(() => setShowTransition(false), []);
@@ -62,7 +63,7 @@ export function StudyPage() {
         if (phase === "exit") return; // chặn bấm liên tục khi đang animate
         setPhase("exit");
         setTimeout(() => {
-            setLearned((v) => v + 1);
+            // setLearned((v) => v + 1);
             setIndex((v) => v + 1);
             setPhase("enter");
         }, SLIDE_MS);
@@ -75,11 +76,6 @@ export function StudyPage() {
 
     const { topic } = useParams();// id topic
 
-    const [learned, setLearned] = useState(0);
-
-    const onLearnOneVocab = () => {
-        setLearned((v) => v + 1)
-    }
 
     return (
         <div className="h-full flex flex-col items-center px-3 py-3 gap-10">
@@ -101,12 +97,11 @@ export function StudyPage() {
                 <StudyTransition origin={origin} onComplete={handleTransitionDone} />
             )}
 
-            <ProgressBar current={learned} total={total} iconName="progress-mark" />
+            <ProgressBar current={index} total={total} iconName="progress-mark" />
 
-            {/* overflow-hidden để card không làm xuất hiện thanh cuộn ngang khi trượt */}
             <div className="h-full w-full overflow-hidden flex flex-col gap-6 justify-center items-center">
                 {!showTransition && !finished && (
-                    <>
+                    <div>
                         <div
                             key={index}
                             className="card-slide flex flex-col gap-4"
@@ -134,12 +129,12 @@ export function StudyPage() {
                                 <ImgButton
                                     className="underline"
                                     text="Mình đã thuộc từ này"
-                                    onClick={goNext} // sau này có thể tách logic: đánh dấu đã thuộc rồi mới goNext
+                                    onClick={goNext}
                                 />
                             </div>
                         </div>
 
-                    </>
+                    </div>
                 )}
 
                 {!showTransition && finished && (
