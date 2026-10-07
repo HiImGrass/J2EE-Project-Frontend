@@ -1,23 +1,17 @@
-import { FlashCard } from "@/features/learn-new-vocab/FlashCard";
 import { ProgressBar } from "@/features/learn-new-vocab/ProgressBar";
 import { useCallback, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { ImgButton } from '../../components/ui/ImgButton';
+import { useNavigate, useParams } from "react-router-dom";
 import StudyTransition from "@/features/learn-new-vocab/StudyTransition";
-
-type Word = {
-    word: string;
-    example: string;
-    pronunciation: string;
-    meaning: string;
-    partOfSpeech: string;
-};
+import { StudyResultCard } from "@/features/study/components/StudyResultCard";
+import type { Phase, Step, Word } from "@/features/study/types";
+import { StepView } from "@/features/study/components/StepView";
 
 // Sau này thay bằng data fetch theo topic
 const WORDS: Word[] = [
     {
         word: "student",
         example: "His younger sister is a student at that university.",
+        exampleMeaning: "Em gái của anh ấy là sinh viên tại trường đại học đó.",
         pronunciation: "/ˈstuːdnt/",
         meaning: "Học sinh, sinh viên",
         partOfSpeech: "(n)",
@@ -25,6 +19,7 @@ const WORDS: Word[] = [
     {
         word: "teacher",
         example: "She is a teacher at a local school.",
+        exampleMeaning: "Cô ấy là giáo viên tại một trường học địa phương.",
         pronunciation: "/ˈtiːtʃər/",
         meaning: "Giáo viên",
         partOfSpeech: "(n)",
@@ -32,30 +27,30 @@ const WORDS: Word[] = [
     {
         word: "library",
         example: "I often study at the library after class.",
+        exampleMeaning: "Tôi thường học ở thư viện sau giờ học.",
         pronunciation: "/ˈlaɪbreri/",
         meaning: "Thư viện",
         partOfSpeech: "(n)",
     },
 ];
 
-const SLIDE_MS = 350;
+const STEPS: Step[] = WORDS.flatMap((w): Step[] => [
+    { type: "flashcard", id: `fc-${w.word}`, data: w },
+    { type: "listen-write", id: `lw-${w.word}`, vocab: w, answer: w.word }
+]);
 
-type Phase = "enter" | "idle" | "exit";
+const SLIDE_MS = 350;
 
 export function StudyPage() {
 
-    // (tuỳ chọn) nhận toạ độ click từ trang trước: navigate("/study/abc", { state: { origin: {x, y} } })
-    const location = useLocation();
-    const origin = location.state?.origin;
-
     const [showTransition, setShowTransition] = useState(true);
     const [index, setIndex] = useState(0);
-    const [phase, setPhase] = useState<Phase>("enter");
+    const [phase, setPhase] = useState<Phase>("enter"); // state lưu trạng thái đang hoạt động của thẻ, tránh spam khi đang chuyển
 
-    const total = WORDS.length;
+    const total = STEPS.length;
     const finished = index >= total;
 
-    const current = WORDS[index];
+    const current = STEPS[index];
 
     const handleTransitionDone = useCallback(() => setShowTransition(false), []);
 
@@ -94,12 +89,12 @@ export function StudyPage() {
       `}</style>
 
             {showTransition && (
-                <StudyTransition origin={origin} onComplete={handleTransitionDone} />
+                <StudyTransition onComplete={handleTransitionDone} />
             )}
 
             <ProgressBar current={index} total={total} iconName="progress-mark" />
 
-            <div className="h-full w-full overflow-hidden flex flex-col gap-6 justify-center items-center">
+            <div className="h-full w-full overflow-hidden flex flex-col gap-6">
                 {!showTransition && !finished && (
                     <div>
                         <div
@@ -113,41 +108,17 @@ export function StudyPage() {
                             }}
                             onAnimationEnd={() => phase === "enter" && setPhase("idle")}
                         >
-                            <FlashCard
-                                word={current.word}
-                                example={current.example}
-                                pronunciation={current.pronunciation}
-                                meaning={current.meaning}
-                                partOfSpeech={current.partOfSpeech}
-                            />
-                            <div className="flex flex-col items-center gap-2">
-                                <ImgButton
-                                    text="Tiếp tục"
-                                    onClick={goNext}
-                                    className="p-4 bg-primary text-white rounded-xl text-center text-nowrap"
-                                />
-                                <ImgButton
-                                    className="underline"
-                                    text="Mình đã thuộc từ này"
-                                    onClick={goNext}
-                                />
-                            </div>
+                            <StepView step={current} onNext={goNext} />
                         </div>
 
                     </div>
                 )}
 
                 {!showTransition && finished && (
-                    <div className="text-center">
-                        <h2 className="text-2xl font-bold">Hoàn thành! 🎉</h2>
-                        <p className="text-gray-500">Bạn đã học {total} từ trong chủ đề này.</p>
-                        <button
-                            className="bg-primary text-white p-4"
-                            onClick={() => backToLearningPath()}
-                        >
-                            trở về
-                        </button>
-                    </div>
+                    <StudyResultCard
+                        total={WORDS.length}
+                        onBackToLearningPath={() => backToLearningPath()}
+                    />
                 )}
             </div>
         </div>
