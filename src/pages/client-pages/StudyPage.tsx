@@ -36,7 +36,8 @@ const WORDS: Word[] = [
 
 const STEPS: Step[] = WORDS.flatMap((w): Step[] => [
     { type: "flashcard", id: `fc-${w.word}`, data: w },
-    { type: "listen-write", id: `lw-${w.word}`, vocab: w, answer: w.word }
+    { type: "listen-write", id: `lw-${w.word}`, vocab: w, answer: w.word },
+    { type: "fill-in-blank", id: `fib-${w.word}`, vocab: w, answer: w.word }
 ]);
 
 const SLIDE_MS = 350;
@@ -54,14 +55,22 @@ export function StudyPage() {
 
     const handleTransitionDone = useCallback(() => setShowTransition(false), []);
 
-    const goNext = () => {
-        if (phase === "exit") return; // chặn bấm liên tục khi đang animate
+    const goTo = (targetIndex: number) => {
+        if (phase === "exit") return;
         setPhase("exit");
         setTimeout(() => {
-            // setLearned((v) => v + 1);
-            setIndex((v) => v + 1);
+            setIndex(targetIndex);
             setPhase("enter");
         }, SLIDE_MS);
+    };
+
+    // Sang bước kế tiếp (flashcard → listen-write → fill-in-blank)
+    const goNext = () => goTo(index + 1);
+
+    // Bỏ qua 2 bài tập, nhảy thẳng tới flashcard của từ kế tiếp
+    const goNextWord = () => {
+        const next = STEPS.findIndex((s, i) => i > index && s.type === "flashcard");
+        goTo(next === -1 ? total : next); // không còn từ nào → total = màn kết quả
     };
 
     const navigate = useNavigate();
@@ -108,7 +117,11 @@ export function StudyPage() {
                             }}
                             onAnimationEnd={() => phase === "enter" && setPhase("idle")}
                         >
-                            <StepView step={current} onNext={goNext} />
+                            <StepView
+                                step={current}
+                                onNext={goNext}
+                                onNextWord={current.type === "flashcard" ? goNextWord : undefined}
+                            />
                         </div>
 
                     </div>
