@@ -1,5 +1,5 @@
 import { Icon } from '@/components/ui/icon'
-import { RegisterForm } from '@/components/RegisterForm'
+import { RegisterForm } from '@/features/admin/components/RegisterForm'
 
 export function RegisterPage() {
   return (
