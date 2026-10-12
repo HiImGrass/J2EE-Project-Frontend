@@ -7,6 +7,9 @@ import MainLayout from '@/layouts/MainLayout'
 import { RequireRole } from './RequireRole'
 import AdminLayout from '@/layouts/AdminLayout'
 import DashboardPage from '@/pages/admin-pages/DashboardPage'
+import AdminLearningPathPage from '@/pages/admin-pages/AdminLearningPathPage'
+import AdminTopicPage from '@/pages/admin-pages/AdminTopicPage'
+import AdminVocabPage from '@/pages/admin-pages/AdminVocabPage'
 import { ClassPage } from '@/pages/client-pages/ClassPage'
 import { HeaderOnlyLayout } from '@/layouts/HeaderOnlyLayout'
 import { JoinClassPage } from '@/pages/client-pages/JoinClassPage'
@@ -67,6 +70,9 @@ export const router = createBrowserRouter([
                 element: <AdminLayout />,
                 children: [
                   { index: true, element: <DashboardPage /> }, // /admin
+                  { path: 'learning-paths', element: <AdminLearningPathPage /> },
+                  { path: 'learning-paths/:id/topics', element: <AdminTopicPage /> },
+                  { path: 'learning-paths/:id/topics/:topicId/vocabularies', element: <AdminVocabPage /> },
                   // Tính năng cho ADMIN
                   {
                     element: <RequireRole allowedRoles={['ADMIN']} />,
