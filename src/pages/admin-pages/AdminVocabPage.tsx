@@ -1,17 +1,19 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import BackButton from '@/components/BackButton'
 import { ActionBar } from '@/features/admin/components/ActionBar'
 import { VocabCard } from '@/features/admin/components/VocabCard'
 import { mockTopics, mockVocabularies } from '@/features/admin/mockData'
 
 export default function AdminVocabPage() {
-  const { topicId } = useParams<{
+  const { id, learningPathId, topicId } = useParams<{
     id?: string
     learningPathId?: string
     topicId?: string
   }>()
+  const navigate = useNavigate()
   const currentTopicId = Number(topicId)
+  const currentLearningPathId = id || learningPathId || '1'
   const [search, setSearch] = useState('')
 
   const currentTopic = mockTopics.find((t) => t.id === currentTopicId)
@@ -24,7 +26,7 @@ export default function AdminVocabPage() {
   )
 
   const handleAdd = () => {
-    console.log('Thêm từ vựng, topicId:', currentTopicId)
+    navigate(`/admin/learning-paths/${currentLearningPathId}/topics/${currentTopicId}/vocabularies/create`)
   }
 
   const handleViewDetail = (vocabId: number) => {
