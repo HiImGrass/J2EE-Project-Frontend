@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react';
-// Chỉnh lại đường dẫn import cho đúng với project của bạn
+import { useMemo, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 
 interface FillInBlankExerciseProps {
-    word: Word;
+    word: Vocabulary;
     onCheck?: (answer: string) => void;
     className?: string;
 }
@@ -21,6 +20,23 @@ export const FillInBlankExercise = ({
     const isFull = answer.length === word.word.length;
     // Ô đang được nhập (ô tiếp theo cần điền, hoặc ô cuối nếu đã đầy)
     const activeIndex = Math.min(answer.length, word.word.length - 1);
+    const hintCharacters = useMemo(() => {
+        const wordLength = word.word.length;
+
+        if (wordLength <= 1) return [];
+
+        const hintCount = Math.floor(Math.random() * (wordLength - 1)) + 1;
+        const indexes = Array.from({ length: wordLength }, (_, index) => index);
+
+        for (let index = indexes.length - 1; index > 0; index -= 1) {
+            const randomIndex = Math.floor(Math.random() * (index + 1));
+            [indexes[index], indexes[randomIndex]] = [indexes[randomIndex], indexes[index]];
+        }
+
+        return indexes
+            .slice(0, hintCount)
+            .map((index) => ({ index, character: word.word[index] }));
+    }, [word.word]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // Bỏ khoảng trắng và giới hạn đúng số ký tự
@@ -60,7 +76,11 @@ export const FillInBlankExercise = ({
                                     isActive ? 'border-primary' : 'border-gray-300'
                                 )}
                             >
-                                {answer[index] ?? ''}
+                                {answer[index] ?? (
+                                    <span className="text-gray-400/60">
+                                        {hintCharacters.find((hint) => hint.index === index)?.character}
+                                    </span>
+                                )}
                             </div>
                         );
                     })}

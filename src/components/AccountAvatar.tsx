@@ -1,5 +1,7 @@
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "./ui/dropdown-menu";
 import { Image } from "./ui/image";
+import authService from "@/features/auth/api/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const AccountControls = [
     {
@@ -17,6 +19,7 @@ const AccountControls = [
 ]
 
 export function AccountAvatar() {
+    const navigate = useNavigate();
 
     const handleClickAvatar = (key: string) => {
         switch (key) {
@@ -27,7 +30,7 @@ export function AccountAvatar() {
                 myClass()
                 break;
             case "log_out":
-                logOut();
+                void logOut();
                 break;
 
             default:
@@ -40,11 +43,19 @@ export function AccountAvatar() {
     }
 
     const myClass = () => {
-
+        navigate("/student-classes");
     }
 
-    const logOut = () => {
-
+    const logOut = async () => {
+        try {
+            await authService.logout();
+        } catch (error) {
+            console.error("Đăng xuất khỏi máy chủ thất bại:", error);
+        } finally {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            navigate("/login", { replace: true });
+        }
     }
 
     return (

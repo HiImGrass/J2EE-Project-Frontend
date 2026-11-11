@@ -3,7 +3,7 @@ import { Volume2 } from 'lucide-react';
 // TODO: chỉnh lại đường dẫn import cho khớp với project của bạn
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 
 export interface AudioOption {
     id: string;
@@ -11,7 +11,7 @@ export interface AudioOption {
 }
 
 interface TextToAudioExerciseProps {
-    word: Word;
+    word: Vocabulary;
     options: AudioOption[];
     onCheck?: (selectedId: string) => void;
     onSkip?: () => void;

@@ -22,7 +22,7 @@ export function LoginForm() {
   return (
     <div className="flex w-full flex-col items-center">
       <h2 className="text-sm font-bold tracking-wider text-[#1c3aa9] uppercase">ĐĂNG NHẬP</h2>
-      <p className="mt-1 mb-6 text-[13px] text-gray-500">Đăng nhập tài khoản học LA2P</p>
+      <p className="mt-1 mb-6 text-base text-gray-500">Đăng nhập tài khoản học LA2P</p>
 
       <form onSubmit={handleSubmit} className="w-full space-y-3">
         <div>
@@ -32,7 +32,7 @@ export function LoginForm() {
             placeholder="Nhập mã học viên"
             value={studentId}
             onChange={(e) => setStudentId(e.target.value)}
-            className="h-10 text-[13px] placeholder:text-gray-400 focus-visible:ring-[#1c3aa9]"
+            className="h-10 text-base placeholder:text-gray-400 focus-visible:ring-[#1c3aa9]"
           />
         </div>
 
@@ -43,7 +43,7 @@ export function LoginForm() {
             placeholder="Nhập mật khẩu"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="h-10 pr-10 text-[13px] placeholder:text-gray-400 focus-visible:ring-[#1c3aa9]"
+            className="h-10 pr-10 text-base placeholder:text-gray-400 focus-visible:ring-[#1c3aa9]"
           />
           <button
             type="button"
@@ -103,13 +103,13 @@ export function LoginForm() {
         <button
           id="login-submit-btn"
           type="submit"
-          className="w-full rounded bg-[#1c3aa9] py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-blue-800 active:scale-[0.98]"
+          className="w-full rounded bg-[#1c3aa9] py-2.5 text-base font-semibold text-white transition-colors hover:bg-blue-800 active:scale-[0.98]"
         >
           ĐĂNG NHẬP
         </button>
       </form>
 
-      <div className="mt-4 flex w-full justify-start text-[13px] text-gray-500">
+      <div className="mt-4 flex w-full justify-start text-base text-gray-500">
         <span>Bạn chưa có tài khoản?</span>
         <Link
           to="/register"
@@ -130,7 +130,7 @@ export function LoginForm() {
       <button
         id="google-login-btn"
         type="button"
-        className="flex w-full items-center justify-center gap-2 rounded border border-gray-200 bg-white py-2.5 text-[13px] font-medium text-gray-600 shadow-sm transition-colors hover:bg-gray-50 active:scale-[0.98]"
+        className="flex w-full items-center justify-center gap-2 rounded border border-gray-200 bg-white py-2.5 text-base font-medium text-gray-600 shadow-sm transition-colors hover:bg-gray-50 active:scale-[0.98]"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
           <path

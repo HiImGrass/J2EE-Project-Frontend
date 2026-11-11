@@ -1,21 +1,11 @@
 import { useState } from "react";
 import { ListenAndWriteExercise } from "./ListenAndWriteExercise";
 import { ResultSheet } from "./ResultSheet";
-import type { Word } from "@/types/student-study.type";
-
-
-const speak = (text: string, rate = 1) => {
-    // window.speechSynthesis.cancel();
-    // const u = new SpeechSynthesisUtterance(text);
-    // u.lang = "en-US";
-    // u.rate = rate;
-    // window.speechSynthesis.speak(u);
-    console.log(text);
-};
+import type { Vocabulary } from "@/types/student-study.type";
 
 export function ListenAndWriteStep(
     { answer, vocab, onNext }:
-        { answer: string; vocab: Word; onNext: () => void }
+        { answer: string; vocab: Vocabulary; onNext: () => void }
 ) {
     // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);
@@ -28,8 +18,7 @@ export function ListenAndWriteStep(
     return (
         <div className="flex flex-col h-full items-center gap-2">
             <ListenAndWriteExercise
-                onPlay={() => speak(answer, 1)}
-                onPlaySlow={() => speak(answer, 0.5)}
+                audioPublicId={vocab.audioUrl}
                 onCheck={handleCheck}
             />
 

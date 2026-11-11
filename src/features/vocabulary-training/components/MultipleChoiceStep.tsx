@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { MultipleChoiceExercise, type ChoiceOption } from './MultipleChoiceExercise';
 import { ResultSheet } from '@/features/study/components/ResultSheet';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 
 export function MultipleChoiceStep(
     { question, answer, vocab, options, onNext }:
-        { question: string; answer: string; vocab: Word; options: ChoiceOption[]; onNext: () => void }
+        { question: string; answer: string; vocab: Vocabulary; options: ChoiceOption[]; onNext: () => void }
 ) {
     // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);

@@ -1,8 +1,13 @@
-export type Word = {
+export type Vocabulary = {
+    id: number;
+    topicId: number;
     word: string;
-    example: string;
-    pronunciation: string;
+    pronunciation: string | null;
     meaning: string;
     partOfSpeech: string;
-    exampleMeaning: string;
+    example: string | null;
+    audioUrl: string | null;
+    imageUrl: string | null;
+    createdAt: string;
+    updatedAt: string | null;
 };
