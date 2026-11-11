@@ -1,10 +1,8 @@
-import { ProgressBar } from "@/features/learn-new-vocab/ProgressBar";
-import { useCallback, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import StudyTransition from "@/features/learn-new-vocab/StudyTransition";
+import { useNavigate } from "react-router-dom";
 import { StudyResultCard } from "@/features/study/components/StudyResultCard";
-import type { Phase, Step, Word } from "@/features/study/types";
-import { StepView } from "@/features/study/components/StepView";
+import { StudyFlow } from "@/components/StudyFlow";
+import type { Word } from "@/types/student-study.type";
+import type { Step } from "@/types/transition.type";
 
 // Sau này thay bằng data fetch theo topic
 const WORDS: Word[] = [
@@ -40,100 +38,18 @@ const STEPS: Step[] = WORDS.flatMap((w): Step[] => [
     { type: "fill-in-blank", id: `fib-${w.word}`, vocab: w, answer: w.word }
 ]);
 
-const SLIDE_MS = 350;
-
 export function StudyPage() {
-
-    const [showTransition, setShowTransition] = useState(true);
-    const [index, setIndex] = useState(0);
-    const [phase, setPhase] = useState<Phase>("enter"); // state lưu trạng thái đang hoạt động của thẻ, tránh spam khi đang chuyển
-
-    const total = STEPS.length;
-    const finished = index >= total;
-
-    const current = STEPS[index];
-
-    const handleTransitionDone = useCallback(() => setShowTransition(false), []);
-
-    const goTo = (targetIndex: number) => {
-        if (phase === "exit") return;
-        setPhase("exit");
-        setTimeout(() => {
-            setIndex(targetIndex);
-            setPhase("enter");
-        }, SLIDE_MS);
-    };
-
-    // Sang bước kế tiếp (flashcard → listen-write → fill-in-blank)
-    const goNext = () => goTo(index + 1);
-
-    // Bỏ qua 2 bài tập, nhảy thẳng tới flashcard của từ kế tiếp
-    const goNextWord = () => {
-        const next = STEPS.findIndex((s, i) => i > index && s.type === "flashcard");
-        goTo(next === -1 ? total : next); // không còn từ nào → total = màn kết quả
-    };
-
     const navigate = useNavigate();
     const backToLearningPath = () => {
         navigate("/student-learning-path")
     }
 
-    const { topic } = useParams();// id topic
-
-
     return (
-        <div className="h-full flex flex-col items-center px-3 py-3 gap-10">
-            <style>{`
-        @keyframes card-in {
-          from { opacity: 0; transform: translateX(100%); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes card-out {
-          from { opacity: 1; transform: translateX(0); }
-          to   { opacity: 0; transform: translateX(-100%); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .card-slide { animation-duration: 1ms !important; }
-        }
-      `}</style>
-
-            {showTransition && (
-                <StudyTransition onComplete={handleTransitionDone} />
-            )}
-
-            <ProgressBar current={index} total={total} iconName="progress-mark" />
-
-            <div className="h-full w-full overflow-hidden flex flex-col gap-6">
-                {!showTransition && !finished && (
-                    <div>
-                        <div
-                            key={index}
-                            className="card-slide flex flex-col gap-4"
-                            style={{
-                                animation:
-                                    phase === "exit"
-                                        ? `card-out ${SLIDE_MS}ms cubic-bezier(.7,0,.3,1) forwards`
-                                        : `card-in ${SLIDE_MS + 50}ms cubic-bezier(.2,.9,.3,1) both`,
-                            }}
-                            onAnimationEnd={() => phase === "enter" && setPhase("idle")}
-                        >
-                            <StepView
-                                step={current}
-                                onNext={goNext}
-                                onNextWord={current.type === "flashcard" ? goNextWord : undefined}
-                            />
-                        </div>
-
-                    </div>
-                )}
-
-                {!showTransition && finished && (
-                    <StudyResultCard
-                        total={WORDS.length}
-                        onBackToLearningPath={() => backToLearningPath()}
-                    />
-                )}
-            </div>
-        </div>
+        <StudyFlow
+            steps={STEPS}
+            completion={
+                <StudyResultCard total={WORDS.length} onBackToLearningPath={backToLearningPath} />
+            }
+        />
     );
 }

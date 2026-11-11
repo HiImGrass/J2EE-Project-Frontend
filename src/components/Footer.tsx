@@ -7,7 +7,7 @@ const MenuItems = [
         key: 1,
         text: "Ôn tập",
         name: "pencil",
-        path: "/student-practice"
+        path: "/student-vocabulary-training"
     },
     {
         key: 2,

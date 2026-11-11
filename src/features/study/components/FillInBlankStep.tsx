@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { Word } from '../types';
 import { FillInBlankExercise } from './FillInBlankExercise';
 import { ResultSheet } from './ResultSheet';
+import type { Word } from '@/types/student-study.type';
 
 
 export function FillInBlankStep(

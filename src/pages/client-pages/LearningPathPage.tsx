@@ -1,6 +1,6 @@
 import { StudentTitleCard } from "@/components/StudentTitleCard";
 import { TitleLine } from "@/components/TitleLine";
-import { TopicCard } from "@/features/learn-new-vocab/TopicCard";
+import { TopicCard } from "@/features/learn-new-vocab/components/TopicCard";
 
 interface LearningPathPageProp {
     teacherName?: string,
@@ -95,7 +95,7 @@ export function LearningPathPage({
 }: LearningPathPageProp) {
     return (
         <div className="flex flex-col items-center px-3 py-3 gap-3">
-            <div className="flex flex-col w-full p-2 gap-2">
+            <div className="flex flex-col w-full gap-2">
                 <StudentTitleCard title={"LUYỆN THI IELTS KHÓA 25"} />
                 <div className="flex w-full justify-between gap-2">
                     <div className="flex gap-1 min-w-0">
