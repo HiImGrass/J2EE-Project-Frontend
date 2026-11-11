@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { ProgressBar } from "@/features/learn-new-vocab/components/ProgressBar";
 import StudyTransition from "@/features/learn-new-vocab/components/StudyTransition";
 import { StepView } from "./StepView";
+import { ImgButton } from "./ui/ImgButton";
+import { ConfirmationDialog } from "./ConfirmationDialog";
 import type { Phase, Step } from "@/types/transition.type";
 
 const SLIDE_MS = 350;
@@ -10,6 +12,7 @@ interface StudyFlowProps {
   steps: Step[];
   completion?: ReactNode;
   transitionMessage?: string;
+  onExit: () => void;
 }
 
 /** Shared entry transition, progress, and slide navigation for study activities. */
@@ -17,8 +20,10 @@ export function StudyFlow({
   steps,
   completion,
   transitionMessage,
+  onExit,
 }: StudyFlowProps) {
   const [showTransition, setShowTransition] = useState(true);
+  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("enter");
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -60,11 +65,20 @@ export function StudyFlow({
           onComplete={handleTransitionComplete}
         />
       )}
-      <ProgressBar
-        current={index}
-        total={steps.length}
-        iconName="progress-mark"
-      />
+      <div className="flex w-full items-center gap-3">
+        <ImgButton
+          iconName="close"
+          iconSize="sm"
+          className="shrink-0 text-muted-foreground hover:text-destructive"
+          onClick={() => setShowExitConfirmation(true)}
+        />
+        <ProgressBar
+          current={index}
+          total={steps.length}
+          iconName="progress-mark"
+          className="flex-1"
+        />
+      </div>
       <div className="flex h-full w-full flex-col gap-6 overflow-hidden">
         {!showTransition && !finished && current && (
           <div
@@ -86,6 +100,18 @@ export function StudyFlow({
         )}
         {!showTransition && finished && completion}
       </div>
+      {
+        showExitConfirmation &&
+        <ConfirmationDialog
+          open={showExitConfirmation}
+          title="Thoát khỏi bài học?"
+          description="Tiến trình học hiện tại có thể không được lưu."
+          cancelLabel="Ở lại"
+          confirmLabel="Thoát"
+          onCancel={() => setShowExitConfirmation(false)}
+          onConfirm={onExit}
+        />
+      }
       <style>{`
         @keyframes card-in {
           from { opacity: 0; transform: translateX(100%); }

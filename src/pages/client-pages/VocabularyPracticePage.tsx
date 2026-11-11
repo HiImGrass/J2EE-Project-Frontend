@@ -4,34 +4,49 @@ import { StudyFlow } from "@/components/StudyFlow";
 import type { AudioOption } from "@/features/vocabulary-training/components/TextToAudioExercise";
 import type { TextOption } from "@/features/vocabulary-training/components/AudioToTextExercise";
 import type { ChoiceOption } from "@/features/vocabulary-training/components/MultipleChoiceExercise";
-import type { Word } from "@/types/student-study.type";
+import type { Vocabulary } from "@/types/student-study.type";
 import type { Step } from "@/types/transition.type";
 
 // TODO: replace this sample content with vocabulary loaded for the current session.
-const WORDS: Word[] = [
+const WORDS: Vocabulary[] = [
     {
+        id: 1,
+        topicId: 1,
         word: "student",
         example: "His younger sister is a student at that university.",
-        exampleMeaning: "Em gái của anh ấy là sinh viên tại trường đại học đó.",
         pronunciation: "/ˈstuːdnt/",
         meaning: "Học sinh, sinh viên",
         partOfSpeech: "(n)",
+        audioUrl: null,
+        imageUrl: null,
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
     {
+        id: 2,
+        topicId: 1,
         word: "teacher",
         example: "She is a teacher at a local school.",
-        exampleMeaning: "Cô ấy là giáo viên tại một trường học địa phương.",
         pronunciation: "/ˈtiːtʃər/",
         meaning: "Giáo viên",
         partOfSpeech: "(n)",
+        audioUrl: null,
+        imageUrl: null,
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
     {
+        id: 3,
+        topicId: 1,
         word: "library",
         example: "I often study at the library after class.",
-        exampleMeaning: "Tôi thường học ở thư viện sau giờ học.",
         pronunciation: "/ˈlaɪbreri/",
         meaning: "Thư viện",
         partOfSpeech: "(n)",
+        audioUrl: null,
+        imageUrl: null,
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
 ];
 
@@ -87,6 +102,7 @@ export default function VocabularyPracticePage() {
     return (
         <StudyFlow
             steps={STEPS}
+            onExit={() => navigate("/student-learning-path")}
             completion={
                 <StudyResultCard
                     total={WORDS.length}

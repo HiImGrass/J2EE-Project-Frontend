@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { ImgButton } from "@/components/ui/ImgButton";
-import type { Word } from "@/types/student-study.type";
+import type { Vocabulary } from "@/types/student-study.type";
 
 export function ResultSheet({
     isCorrect,
@@ -9,7 +9,7 @@ export function ResultSheet({
     onNext,
 }: {
     isCorrect: boolean;
-    vocab: Word;
+    vocab: Vocabulary;
     onNext: () => void;
 }) {
     const [show, setShow] = useState(false);        // animation trượt lên
@@ -66,9 +66,6 @@ export function ResultSheet({
 
                         <div className="rounded-xl bg-white/60 p-3 text-sm">
                             <p className="text-gray-800">{vocab.example}</p>
-                            {vocab.exampleMeaning && (
-                                <p className="mt-1 text-gray-500">{vocab.exampleMeaning}</p>
-                            )}
                         </div>
                     </div>
                 </div>

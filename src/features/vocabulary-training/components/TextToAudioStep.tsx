@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { TextToAudioExercise, type AudioOption } from './TextToAudioExercise';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 import { ResultSheet } from '@/features/study/components/ResultSheet';
 
 export function TextToAudioStep(
     { answer, vocab, options, onNext }:
-        { answer: string; vocab: Word; options: AudioOption[]; onNext: () => void }
+        { answer: string; vocab: Vocabulary; options: AudioOption[]; onNext: () => void }
 ) {
     // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);

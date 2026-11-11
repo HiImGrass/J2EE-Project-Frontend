@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FillInBlankExercise } from './FillInBlankExercise';
 import { ResultSheet } from './ResultSheet';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 
 
 export function FillInBlankStep(
     { answer, vocab, onNext }:
-        { answer: string; vocab: Word; onNext: () => void }
+        { answer: string; vocab: Vocabulary; onNext: () => void }
 ) {
     // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);

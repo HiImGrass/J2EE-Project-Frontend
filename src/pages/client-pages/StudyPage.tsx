@@ -1,34 +1,49 @@
 import { useNavigate } from "react-router-dom";
 import { StudyResultCard } from "@/features/study/components/StudyResultCard";
 import { StudyFlow } from "@/components/StudyFlow";
-import type { Word } from "@/types/student-study.type";
+import type { Vocabulary } from "@/types/student-study.type";
 import type { Step } from "@/types/transition.type";
 
 // Sau này thay bằng data fetch theo topic
-const WORDS: Word[] = [
+const WORDS: Vocabulary[] = [
     {
+        id: 1,
+        topicId: 1,
         word: "student",
         example: "His younger sister is a student at that university.",
-        exampleMeaning: "Em gái của anh ấy là sinh viên tại trường đại học đó.",
         pronunciation: "/ˈstuːdnt/",
         meaning: "Học sinh, sinh viên",
         partOfSpeech: "(n)",
+        audioUrl: "student_wrif0p",
+        imageUrl: "student_k9uyvr",
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
     {
+        id: 2,
+        topicId: 1,
         word: "teacher",
         example: "She is a teacher at a local school.",
-        exampleMeaning: "Cô ấy là giáo viên tại một trường học địa phương.",
         pronunciation: "/ˈtiːtʃər/",
         meaning: "Giáo viên",
         partOfSpeech: "(n)",
+        audioUrl: "teacher_pwy4c4",
+        imageUrl: "teacher_hmojib",
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
     {
-        word: "library",
-        example: "I often study at the library after class.",
-        exampleMeaning: "Tôi thường học ở thư viện sau giờ học.",
-        pronunciation: "/ˈlaɪbreri/",
-        meaning: "Thư viện",
+        id: 3,
+        topicId: 1,
+        word: "classroom",
+        example: "Our classroom is clean and spacious.",
+        pronunciation: "/ˈklæs.ruːm/",
+        meaning: "Phòng học",
         partOfSpeech: "(n)",
+        audioUrl: "classroom_rvncgc",
+        imageUrl: "classroom_w8gdex",
+        createdAt: "2026-11-11T00:00:00Z",
+        updatedAt: null,
     },
 ];
 
@@ -47,6 +62,7 @@ export function StudyPage() {
     return (
         <StudyFlow
             steps={STEPS}
+            onExit={backToLearningPath}
             completion={
                 <StudyResultCard total={WORDS.length} onBackToLearningPath={backToLearningPath} />
             }

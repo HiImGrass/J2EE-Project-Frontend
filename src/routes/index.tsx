@@ -1,7 +1,6 @@
 import App from '@/App'
-import HomePage from '@/pages/client-pages/HomePage'
 import ErrorPage from '@/pages/ErrorPage'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 import MainLayout from '@/layouts/MainLayout'
 import { RequireRole } from './RequireRole'
@@ -56,7 +55,7 @@ export const router = createBrowserRouter([
           {
             element: <MainLayout />,
             children: [
-              { path: '/', element: <HomePage /> },
+              { index: true, element: <Navigate to="/student-learning-path" replace /> },
               { path: '/student-learning-path', element: <LearningPathPage /> },
               { path: '/student-vocabulary-training', element: <VocabularyTrainingPage /> },
               { path: '/student-notebook', element: <NoteBookPage /> },

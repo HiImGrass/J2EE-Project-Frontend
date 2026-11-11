@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { AudioToTextExercise, type TextOption } from './AudioToTextExercise';
 import { ResultSheet } from '@/features/study/components/ResultSheet';
-import type { Word } from '@/types/student-study.type';
+import type { Vocabulary } from '@/types/student-study.type';
 
 const SLOW_RATE = 0.6;
 
 export function AudioToTextStep(
     { answer, vocab, options, audioUrl, onNext }:
-        { answer: string; vocab: Word; options: TextOption[]; audioUrl?: string; onNext: () => void }
+        { answer: string; vocab: Vocabulary; options: TextOption[]; audioUrl?: string; onNext: () => void }
 ) {
     // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);
