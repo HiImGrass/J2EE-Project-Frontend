@@ -1,0 +1,16 @@
+import type { AudioOption } from "@/features/vocabulary-training/components/TextToAudioExercise";
+import type { Word } from "./student-study.type";
+import type { TextOption } from "@/features/vocabulary-training/components/AudioToTextExercise";
+import type { ChoiceOption } from "@/features/vocabulary-training/components/MultipleChoiceExercise";
+
+//step định nghĩa kiểu dữ liệu mỗi thẻ chuyển, thuộc tính định danh bắt buộc có: type, id
+export type Step =
+    | { type: "flashcard"; id: string; data: Word }
+    | { type: "listen-write"; id: string; vocab: Word, answer: string }
+    | { type: "fill-in-blank"; id: string; vocab: Word, answer: string }
+    | { type: "fill-in-blank"; id: string; vocab: Word, answer: string }
+    | { type: "text-to-audio"; id: string; vocab: Word; answer: string; options: AudioOption[] }
+    | { type: "audio-to-text"; id: string; vocab: Word; answer: string; options: TextOption[]; audioUrl?: string }
+    | { type: "multiple-choice"; id: string; vocab: Word; question: string; answer: string; options: ChoiceOption[] }
+
+export type Phase = "enter" | "idle" | "exit";

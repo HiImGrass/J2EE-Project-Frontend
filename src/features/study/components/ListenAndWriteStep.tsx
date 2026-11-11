@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ListenAndWriteExercise } from "./ListenAndWriteExercise";
-import type { Word } from "../types";
 import { ResultSheet } from "./ResultSheet";
+import type { Word } from "@/types/student-study.type";
 
 
 const speak = (text: string, rate = 1) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import type { Word } from "../types";
 import { createPortal } from "react-dom";
 import { ImgButton } from "@/components/ui/ImgButton";
+import type { Word } from "@/types/student-study.type";
 
 export function ResultSheet({
     isCorrect,

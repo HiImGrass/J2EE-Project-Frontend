@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 // Chỉnh lại đường dẫn import cho đúng với project của bạn
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
-import type { Word } from '../types';
+import type { Word } from '@/types/student-study.type';
 
 interface FillInBlankExerciseProps {
     word: Word;
