@@ -111,7 +111,6 @@ export function LearningPathPage({
 
             </div>
 
-            <TitleLine title={"LỘ TRÌNH"} />
 
             <div className="flex flex-col w-full gap-4">
                 {
