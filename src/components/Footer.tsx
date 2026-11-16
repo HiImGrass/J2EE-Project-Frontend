@@ -38,7 +38,7 @@ export function Footer() {
     }
 
     return (
-        <div className='h-16 w-full bg-background flex justify-between p-2'>
+        <div className='h-16 w-full bg-background flex justify-between p-2 rounded-t-lg border-t-2 border-primary'>
             {
                 MenuItems.map((item, key) => {
                     const isActive = activeKey === item.key;

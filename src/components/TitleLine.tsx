@@ -8,8 +8,8 @@ interface TitleLineProps {
 export function TitleLine({
     title,
     className,
-    lineClassName = "bg-muted-foreground",
-    textClassName = "text-muted-foreground",
+    lineClassName = "bg-slate-400",
+    textClassName = "text-slate-400",
 }: TitleLineProps) {
     return (
         <div className={`w-full flex items-center gap-2 ${className}`}>
