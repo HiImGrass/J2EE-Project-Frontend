@@ -1,17 +1,11 @@
+import { AudioButton } from '@/components/AudioButton';
 import { Icon } from '@/components/ui/icon';
 import { Image } from '@/components/ui/image';
+import type { Vocabulary } from '@/types/student-study.type';
 import { useState } from 'react';
 
 export interface FlashCardProps {
-    word: string;
-    example: string; // câu ví dụ có chứa từ vựng
-    pronunciation: string; // phát âm, vd: /skuːl/
-    meaning: string;
-    partOfSpeech: string; // từ loại, vd: noun
-    publicId?: string;
-    src?: string;
-    onPlay?: () => void; // nút loa
-    onPlaySlow?: () => void; // nút ốc sên
+    vocabulary: Vocabulary;
 }
 
 // Tách câu ví dụ để in đậm + gạch chân từ vựng
@@ -36,21 +30,11 @@ const renderExample = (example: string, word: string) => {
 const FACE =
     'absolute inset-0 p-6 bg-gray-100 rounded-2xl [backface-visibility:hidden] [-webkit-backface-visibility:hidden] shadow-xl';
 
-export const FlashCard = ({
-    word,
-    example,
-    pronunciation,
-    meaning,
-    partOfSpeech,
-    publicId = 'School_okqkhw',
-    src,
-    onPlay,
-    onPlaySlow,
-}: FlashCardProps) => {
+export const FlashCard = ({ vocabulary }: FlashCardProps) => {
     const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
     const flipCard = () => {
-        setIsFlipped((prev) => !prev)
+        setIsFlipped((prev) => !prev);
     }
 
     return (
@@ -68,20 +52,24 @@ export const FlashCard = ({
                 <div className={FACE}>
                     <div className="h-full flex flex-col gap-4 items-center">
                         <div className='w-full p-4'>
-                            <Image publicId={publicId} src={src} aspect="square" alt={word} />
+                            <Image
+                                publicId={vocabulary.imageUrl ?? undefined}
+                                aspect="square"
+                                alt={vocabulary.word}
+                            />
                         </div>
 
-                        <div className="flex flex-row gap-4">
-                            <button type="button" onClick={onPlay} className="w-8 h-8">
-                                <Icon name="volume" />
-                            </button>
-                            <button type="button" onClick={onPlaySlow} className="w-8 h-8">
-                                <Icon name="snail" />
-                            </button>
+                        <div className="flex flex-row gap-4 items-center">
+                            <AudioButton publicId={vocabulary.audioUrl ?? ''} />
+                            <AudioButton
+                                publicId={vocabulary.audioUrl ?? ''}
+                                playbackRate={0.7}
+                                iconName="snail"
+                            />
                         </div>
 
                         <div className='text-center'>
-                            {renderExample(example, word)}
+                            {renderExample(vocabulary.example ?? '', vocabulary.word)}
                         </div>
                     </div>
                     <div
@@ -94,10 +82,10 @@ export const FlashCard = ({
                 {/* ===== Mặt sau (xoay sẵn 180 độ) ===== */}
                 <div className={`${FACE} transform-[rotateY(180deg)]`}>
                     <div className="h-full flex flex-col gap-4 justify-center items-center">
-                        <div className="text-2xl font-medium">{word}</div>
-                        <p>{pronunciation}</p>
+                        <div className="text-2xl font-medium">{vocabulary.word}</div>
+                        <p>{vocabulary.pronunciation ?? ''}</p>
                         <p>
-                            {meaning} ({partOfSpeech})
+                            {vocabulary.meaning} ({vocabulary.partOfSpeech})
                         </p>
                     </div>
                     <div

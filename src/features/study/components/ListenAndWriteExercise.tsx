@@ -1,18 +1,17 @@
+import { AudioButton } from '@/components/AudioButton';
 import { ImgButton } from '@/components/ui/ImgButton';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 interface ListenAndWriteExerciseProps {
-    onPlay?: () => void;
-    onPlaySlow?: () => void;
+    audioPublicId: string | null;
     onCheck?: (answer: string) => void;
     className?: string;
 }
 
 export const ListenAndWriteExercise = ({
-    onPlay,
-    onPlaySlow,
+    audioPublicId,
     onCheck,
     className = '',
 }: ListenAndWriteExerciseProps) => {
@@ -28,17 +27,17 @@ export const ListenAndWriteExercise = ({
 
             <div className='flex flex-col gap-8 w-full'>
                 <div className="flex flex-row items-center justify-center gap-4">
-                    <ImgButton
-                        iconName="volume"
-                        iconSize="lg"
-                        onClick={onPlay}
-                        className="w-24 h-24 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                    <AudioButton
+                        publicId={audioPublicId ?? ''}
+                        className="p-5 h-24 w-24 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                        aria-label="Phát âm"
                     />
-                    <ImgButton
+                    <AudioButton
+                        publicId={audioPublicId ?? ''}
+                        playbackRate={0.7}
                         iconName="snail"
-                        iconSize="sm"
-                        onClick={onPlaySlow}
-                        className="w-16 h-16 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                        className="p-5 h-16 w-16 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                        aria-label="Phát âm chậm"
                     />
                 </div>
                 <Input
