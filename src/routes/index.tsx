@@ -23,6 +23,7 @@ import { LoginPage } from '@/pages/client-pages/LoginPage'
 import { RegisterPage } from '@/pages/client-pages/RegisterPage'
 import { VocabularyTrainingPage } from '@/pages/client-pages/VocabularyTrainingPage'
 import VocabularyPracticePage from '@/pages/client-pages/VocabularyPracticePage'
+import AdminAccount from '@/pages/admin-pages/AdminAccount'
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,7 @@ export const router = createBrowserRouter([
                   { path: 'learning-paths/:id/topics', element: <AdminTopicPage /> },
                   { path: 'learning-paths/:id/topics/:topicId/vocabularies', element: <AdminVocabPage /> },
                   { path: 'learning-paths/:id/topics/:topicId/vocabularies/create', element: <AdminVocabCreatePage /> },
+                  { path: 'accounts', element: <AdminAccount /> },
                   // Tính năng cho ADMIN
                   {
                     element: <RequireRole allowedRoles={['ADMIN']} />,
