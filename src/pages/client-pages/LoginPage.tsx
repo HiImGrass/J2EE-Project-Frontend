@@ -1,5 +1,5 @@
 import { Icon } from '@/components/ui/icon'
-import { LoginForm } from '@/components/LoginForm'
+import { LoginForm } from '@/features/admin/components/LoginForm'
 
 export function LoginPage() {
   return (
