@@ -1,5 +1,5 @@
-import { Icon } from './ui/icon'
-import { AccountAvatar } from './AccountAvatar'
+import { AccountAvatar } from '@/components/AccountAvatar'
+import { Icon } from '@/components/ui/icon'
 
 interface AdminHeaderProps {
   searchPlaceholder?: string

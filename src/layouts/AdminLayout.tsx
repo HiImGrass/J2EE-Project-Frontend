@@ -1,7 +1,7 @@
 import { NavBar } from '@/components/NavBar'
-import { AdminHeader } from '@/components/AdminHeader'
 import { Outlet } from 'react-router-dom'
 import type { SideBarMenuGroup } from '@/components/SideBar'
+import { AdminHeader } from '@/features/admin/components/AdminHeader'
 
 const MenuItems: SideBarMenuGroup[] = [
   {
@@ -20,12 +20,6 @@ const MenuItems: SideBarMenuGroup[] = [
         icon: 'graduation-cap',
         path: '/admin/classes',
       },
-      {
-        key: 3,
-        text: 'Quản lý lộ trình lớp học',
-        icon: 'map',
-        path: '/admin/learning-paths',
-      },
     ],
   },
   {
@@ -33,16 +27,16 @@ const MenuItems: SideBarMenuGroup[] = [
     groupLabel: '- Quản trị',
     items: [
       {
-        key: 4,
+        key: 3,
         text: 'Quản lý tài khoản',
         icon: 'users',
         path: '/admin/accounts',
       },
       {
-        key: 5,
-        text: 'Quản lý bộ từ vựng',
-        icon: 'book',
-        path: '/admin/vocabulary',
+        key: 4,
+        text: 'Quản lý lộ trình',
+        icon: 'map',
+        path: '/admin/learning-paths',
       },
     ],
   },
@@ -56,7 +50,7 @@ export default function AdminLayout() {
       <div className="flex min-w-0 flex-1 flex-col">
         <AdminHeader />
 
-        <main className="flex-1 bg-background">
+        <main className="flex-1 bg-[#f1f5f9]">
           <Outlet />
         </main>
       </div>

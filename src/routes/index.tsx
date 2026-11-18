@@ -6,6 +6,10 @@ import MainLayout from '@/layouts/MainLayout'
 import { RequireRole } from './RequireRole'
 import AdminLayout from '@/layouts/AdminLayout'
 import DashboardPage from '@/pages/admin-pages/DashboardPage'
+import AdminLearningPathPage from '@/pages/admin-pages/AdminLearningPathPage'
+import AdminTopicPage from '@/pages/admin-pages/AdminTopicPage'
+import AdminVocabPage from '@/pages/admin-pages/AdminVocabPage'
+import AdminVocabCreatePage from '@/pages/admin-pages/AdminVocabCreatePage'
 import { ClassPage } from '@/pages/client-pages/ClassPage'
 import { HeaderOnlyLayout } from '@/layouts/HeaderOnlyLayout'
 import { JoinClassPage } from '@/pages/client-pages/JoinClassPage'
@@ -19,6 +23,7 @@ import { LoginPage } from '@/pages/client-pages/LoginPage'
 import { RegisterPage } from '@/pages/client-pages/RegisterPage'
 import { VocabularyTrainingPage } from '@/pages/client-pages/VocabularyTrainingPage'
 import VocabularyPracticePage from '@/pages/client-pages/VocabularyPracticePage'
+import AdminAccount from '@/pages/admin-pages/AdminAccount'
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +76,11 @@ export const router = createBrowserRouter([
                 element: <AdminLayout />,
                 children: [
                   { index: true, element: <DashboardPage /> }, // /admin
+                  { path: 'learning-paths', element: <AdminLearningPathPage /> },
+                  { path: 'learning-paths/:id/topics', element: <AdminTopicPage /> },
+                  { path: 'learning-paths/:id/topics/:topicId/vocabularies', element: <AdminVocabPage /> },
+                  { path: 'learning-paths/:id/topics/:topicId/vocabularies/create', element: <AdminVocabCreatePage /> },
+                  { path: 'accounts', element: <AdminAccount /> },
                   // Tính năng cho ADMIN
                   {
                     element: <RequireRole allowedRoles={['ADMIN']} />,
