@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StudyResultCard } from "@/features/study/components/StudyResultCard";
+import { StudyVocabularySaveCard } from "@/features/study/components/StudyVocabularySaveCard";
 import { StudyFlow } from "@/components/StudyFlow";
 import type { Vocabulary } from "@/types/student-study.type";
 import type { Step } from "@/types/transition.type";
@@ -55,16 +57,37 @@ const STEPS: Step[] = WORDS.flatMap((w): Step[] => [
 
 export function StudyPage() {
     const navigate = useNavigate();
+    const [showSaveSelection, setShowSaveSelection] = useState(false);
+    const [knownWordIds, setKnownWordIds] = useState<number[]>([]);
     const backToLearningPath = () => {
         navigate("/student-learning-path")
     }
+
+    const handleSaveVocabularies = (selected: Vocabulary[]) => {
+        console.log("Từ vựng được chọn để lưu vào Sổ tay:", selected);
+        backToLearningPath();
+    };
 
     return (
         <StudyFlow
             steps={STEPS}
             onExit={backToLearningPath}
+            onWordMarkedKnown={(wordId) => {
+                setKnownWordIds((current) => current.includes(wordId) ? current : [...current, wordId]);
+            }}
             completion={
-                <StudyResultCard total={WORDS.length} onBackToLearningPath={backToLearningPath} />
+                showSaveSelection ? (
+                    <StudyVocabularySaveCard
+                        vocabularies={WORDS}
+                        knownWordIds={knownWordIds}
+                        onSave={handleSaveVocabularies}
+                    />
+                ) : (
+                    <StudyResultCard
+                        total={WORDS.length}
+                        onContinue={() => setShowSaveSelection(true)}
+                    />
+                )
             }
         />
     );
