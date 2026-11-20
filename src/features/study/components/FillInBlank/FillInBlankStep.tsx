@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FillInBlankExercise } from './FillInBlankExercise';
-import { ResultSheet } from './ResultSheet';
+import { ResultSheet } from '../ResultSheet';
 import type { Vocabulary } from '@/types/student-study.type';
 
 

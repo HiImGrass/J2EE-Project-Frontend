@@ -2,16 +2,12 @@ import { useState } from 'react';
 // TODO: chỉnh lại đường dẫn import cho khớp với project của bạn
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
-
-export interface ChoiceOption {
-    id: string;
-    text: string;
-}
+import type { Answer } from '@/types/question.type';
 
 interface MultipleChoiceExerciseProps {
     question: string;
-    options: ChoiceOption[];
-    onCheck?: (selectedId: string) => void;
+    options: Answer[];
+    onCheck?: (selectedId: number) => void;
     onSkip?: () => void;
     className?: string;
 }
@@ -23,7 +19,7 @@ export const MultipleChoiceExercise = ({
     onSkip,
     className = '',
 }: MultipleChoiceExerciseProps) => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const handleCheck = () => {
         if (!selectedId) return;
@@ -55,7 +51,7 @@ export const MultipleChoiceExercise = ({
                                         : 'border-gray-300 hover:border-primary/50'
                                 )}
                             >
-                                {option.text}
+                                {option.answerContent}
                             </button>
                         );
                     })}

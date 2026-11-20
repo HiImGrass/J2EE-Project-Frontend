@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ListenAndWriteExercise } from "./ListenAndWriteExercise";
-import { ResultSheet } from "./ResultSheet";
+import { ResultSheet } from "../ResultSheet";
 import type { Vocabulary } from "@/types/student-study.type";
 
 export function ListenAndWriteStep(
