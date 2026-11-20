@@ -1,30 +1,25 @@
 import { useState } from 'react';
+import { AudioButton } from '@/components/AudioButton';
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
-
-export interface TextOption {
-    id: string;
-    text: string;
-}
+import type { Answer } from '@/types/question.type';
 
 interface AudioToTextExerciseProps {
-    options: TextOption[];
-    onPlay?: () => void;
-    onPlaySlow?: () => void;
-    onCheck?: (selectedId: string) => void;
+    options: Answer[];
+    audioPublicId: string;
+    onCheck?: (selectedId: number) => void;
     onSkip?: () => void;
     className?: string;
 }
 
 export const AudioToTextExercise = ({
     options,
-    onPlay,
-    onPlaySlow,
+    audioPublicId,
     onCheck,
     onSkip,
     className = '',
 }: AudioToTextExerciseProps) => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const handleCheck = () => {
         if (!selectedId) return;
@@ -38,17 +33,15 @@ export const AudioToTextExercise = ({
             <div className="flex flex-col gap-8 w-full items-center">
                 {/* Nghe phát âm thường + phát âm chậm */}
                 <div className="flex flex-row items-center justify-center gap-4">
-                    <ImgButton
-                        iconName="volume"
-                        iconSize="lg"
-                        onClick={onPlay}
-                        className="w-24 h-24 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                    <AudioButton
+                        publicId={audioPublicId}
+                        className="h-24 w-24 rounded-full bg-primary p-6 text-white hover:opacity-90 active:scale-95 transition"
                     />
-                    <ImgButton
+                    <AudioButton
+                        publicId={audioPublicId}
+                        playbackRate={0.6}
                         iconName="snail"
-                        iconSize="sm"
-                        onClick={onPlaySlow}
-                        className="w-16 h-16 justify-center rounded-full bg-primary text-white hover:opacity-90 active:scale-95 transition"
+                        className="h-16 w-16 rounded-full bg-primary p-4 text-white hover:opacity-90 active:scale-95 transition"
                     />
                 </div>
 
@@ -69,7 +62,7 @@ export const AudioToTextExercise = ({
                                         : 'border-gray-300 hover:border-primary/50'
                                 )}
                             >
-                                {option.text}
+                                {option.answerContent}
                             </button>
                         );
                     })}

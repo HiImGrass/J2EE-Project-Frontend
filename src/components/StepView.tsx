@@ -1,10 +1,10 @@
 import type { Step } from "@/types/transition.type";
-import { FillInBlankStep } from "../features/study/components/FillInBlankStep";
+import { FillInBlankStep } from "../features/study/components/FillInBlank/FillInBlankStep";
 import { FlashCardStep } from "../features/study/components/FlashCardStep";
-import { ListenAndWriteStep } from "../features/study/components/ListenAndWriteStep";
-import { TextToAudioStep } from "@/features/vocabulary-training/components/TextToAudioStep";
-import { AudioToTextStep } from "@/features/vocabulary-training/components/AudioToTextStep";
-import { MultipleChoiceStep } from "@/features/vocabulary-training/components/MultipleChoiceStep";
+import { ListenAndWriteStep } from "../features/study/components/ListenAndWrite/ListenAndWriteStep";
+import { TextToAudioStep } from "@/features/vocabulary-training/components/TextToAudio/TextToAudioStep";
+import { AudioToTextStep } from "@/features/vocabulary-training/components/AudioToText/AudioToTextStep";
+import { MultipleChoiceStep } from "@/features/vocabulary-training/components/MultipleChoice/MultipleChoiceStep";
 
 export function StepView({ step, onNext, onNextWord }: { step: Step; onNext: () => void; onNextWord?: () => void }) {
     switch (step.type) {

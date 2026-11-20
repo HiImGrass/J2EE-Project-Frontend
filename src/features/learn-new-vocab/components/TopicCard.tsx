@@ -4,12 +4,11 @@ import { cva } from "class-variance-authority";
 import { useNavigate } from "react-router-dom";
 
 interface TopicCardProps {
-    topicId: number;
-    order: number;
-    publicId: string;
+    id: number;
+    image_url: string;
     status: "LEARNED" | "UNLEARNED"
-    title: string;
-    meaning: string;
+    topic_name: string;
+    description: string;
 }
 
 const topicCardVariants = cva("flex w-full px-5 py-4 rounded-xl gap-4 items-center shadow-lg shadow-gray-400", {
@@ -24,29 +23,35 @@ const topicCardVariants = cva("flex w-full px-5 py-4 rounded-xl gap-4 items-cent
     },
 });
 
-export function TopicCard({ topicId, order, publicId, status, title, meaning }: TopicCardProps) {
+export function TopicCard({ id, image_url, status, topic_name, description }: TopicCardProps) {
     const navigate = useNavigate();
 
     const handleClickCard = () => {
-        navigate(`/study/${topicId}`)
+        navigate(`/study/${id}`)
     }
     return (
         <div
-            className={cn(topicCardVariants({ status }))}
-            onClick={() => handleClickCard()}
+            className={cn(
+                topicCardVariants({ status }),
+                status === "LEARNED" ? "cursor-pointer" : "pointer-events-none"
+            )}
+            onClick={status === "LEARNED" ? handleClickCard : undefined}
         >
-            <div className="size-18 rounded-full overflow-hidden outline-2 outline-white outline-offset-4">
+            <div className={cn(
+                "size-18 rounded-full overflow-hidden outline-2 outline-white outline-offset-4",
+                status === "UNLEARNED" && "grayscale"
+            )}>
                 <Image
-                    publicId={publicId}
+                    publicId={image_url}
                     aspect="square"
                 />
             </div>
             <div className="flex-col">
                 <div className="text-white text-xl font-medium bg-green-b">
-                    {title}
+                    {topic_name}
                 </div>
-                <div className="text-white">
-                    {order + ". " + meaning}
+                <div className="text-white text-sm">
+                    {description}
                 </div>
             </div>
         </div>

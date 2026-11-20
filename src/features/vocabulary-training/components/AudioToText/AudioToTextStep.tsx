@@ -1,22 +1,20 @@
 import { useState } from 'react';
-import { TextToAudioExercise, type AudioOption } from './TextToAudioExercise';
-import type { Vocabulary } from '@/types/student-study.type';
+import { AudioToTextExercise } from './AudioToTextExercise';
 import { ResultSheet } from '@/features/study/components/ResultSheet';
+import type { Vocabulary } from '@/types/student-study.type';
+import type { Answer } from '@/types/question.type';
 
-export function TextToAudioStep(
-    { answer, vocab, options, onNext }:
-        { answer: string; vocab: Vocabulary; options: AudioOption[]; onNext: () => void }
+export function AudioToTextStep(
+    { answer, vocab, options, audioUrl, onNext }:
+        { answer: number; vocab: Vocabulary; options: Answer[]; audioUrl?: string; onNext: () => void }
 ) {
-    // null = chưa kiểm tra, true/false = đúng/sai
     const [result, setResult] = useState<boolean | null>(null);
 
-    // answer là id của đáp án đúng
-    const handleCheck = (selectedId: string) => {
+    const handleCheck = (selectedId: number) => {
         if (result !== null) return;
         setResult(selectedId === answer);
     };
 
-    // "Mình không thuộc từ này" => tính là sai, hiện đáp án luôn
     const handleSkip = () => {
         if (result !== null) return;
         setResult(false);
@@ -24,9 +22,9 @@ export function TextToAudioStep(
 
     return (
         <div className="flex flex-col h-full items-center gap-2">
-            <TextToAudioExercise
-                word={vocab}
+            <AudioToTextExercise
                 options={options}
+                audioPublicId={audioUrl ?? vocab.audioUrl ?? ''}
                 onCheck={handleCheck}
                 onSkip={handleSkip}
             />
