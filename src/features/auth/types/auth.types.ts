@@ -1,38 +1,25 @@
-import type { ApiResponse } from "../../../types/api.type";
-import type { User } from "../../../types/user.type";
-
-
-// để type tạm thời, lúc tích hợp thì sửa lại thuộc tính sau
 export interface LoginCredentials {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
-export interface RegisterUserData {
-    username: string;
-    password: string;
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: string;
 }
 
-export interface RefreshTokenRequest {
-    refreshToken: string;
-}
+export type RefreshTokenResponse = LoginResponse;
 
-export interface AuthTokens {
-    accessToken: string;
-    refreshToken: string;
+export interface AuthUser {
+  id: number;
+  username: string;
+  email: string;
+  avatar: string;
+  fullName: string;
+  phoneNumber: string;
+  role: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
 }
-
-export interface AuthData {
-    user: User;
-    tokens: AuthTokens;
-}
-
-export interface LogoutData {
-    message: string
-}
-
-export type LoginResponse = ApiResponse<AuthData>;
-export type RegisterResponse = ApiResponse<AuthData>;
-export type RefreshTokenResponse = ApiResponse<AuthTokens>;
-export type LogoutResponse = ApiResponse<LogoutData>;
-export type GetCurrentUserResponse = ApiResponse<User>;

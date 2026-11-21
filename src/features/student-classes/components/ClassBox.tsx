@@ -44,21 +44,24 @@ export function ClassBox({
             <div className="absolute inset-0 bg-linear-to-b from-black/60 via-black/30 to-transparent z-1" />
 
             {/* 3. Nội dung đè lên trên ảnh nền */}
-            <div className="w-full h-full px-4 py-4 flex flex-col justify-between text-white z-10">
+            <div className="w-full h-full px-4 py-4 flex flex-col justify-between text-white z-50">
                 <div className="w-full flex gap-2 justify-between items-center">
                     <div className="text-2xl truncate">{name}</div>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <ImgButton iconName="more-horizontal" text="" className="text-white" />
-                        </DropdownMenuTrigger>
+                        <DropdownMenuTrigger
+                            render={<ImgButton iconName="more-horizontal" text="" className="text-white" />}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
+                        />
 
                         <DropdownMenuContent align="end" className="w-40">
-                            <DropdownMenuItem className="px-4 py-2 active:bg-accent" onClick={() => hiddenClass()}>
+                            <DropdownMenuItem className="px-4 py-2 active:bg-accent" onClick={(e) => { e.stopPropagation(); hiddenClass() }}>
                                 Ẩn
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem className="px-4 py-2 active:bg-accent" onClick={() => cancelClass()}>
+                            <DropdownMenuItem className="px-4 py-2 active:bg-accent" onClick={(e) => { e.stopPropagation(); cancelClass() }}>
                                 Hủy đăng ký
                             </DropdownMenuItem>
                         </DropdownMenuContent>
