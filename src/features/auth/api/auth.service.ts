@@ -1,38 +1,23 @@
 import { axiosClient } from "@/lib/axios";
-import type { User } from "../../../types/user.type";
-import type { AuthData, LoginCredentials, LogoutResponse, RegisterUserData } from "../types/auth.types";
+import type { AuthUser, LoginCredentials, LoginResponse, RefreshTokenResponse } from "../types/auth.types";
 
-const login = async (credentials: LoginCredentials): Promise<AuthData> => {
-    const response = await axiosClient.post("/auth/login", credentials);
-    return response.data;
-};
+const login = (credentials: LoginCredentials): Promise<LoginResponse> =>
+  axiosClient.post("/api/auth/login", credentials) as unknown as Promise<LoginResponse>;
 
-const register = async (userData: RegisterUserData): Promise<AuthData> => {
-    const response = await axiosClient.post("/auth/register", userData);
-    return response.data;
-};
+const logout = (refreshToken: string | null) =>
+  axiosClient.post("/api/auth/logout", { refreshToken });
 
-const refreshToken = async (refreshToken: string): Promise<AuthData['tokens']> => {
-    const response = await axiosClient.post("/auth/refresh", {
-        refreshToken,
-    });
-    return response.data;
-};
+const refreshToken = (refreshToken: string): Promise<RefreshTokenResponse> =>
+  axiosClient.post("/api/auth/refresh", { refreshToken }) as unknown as Promise<RefreshTokenResponse>;
 
-const logout = async (): Promise<LogoutResponse> => {
-    const response = await axiosClient.post("/auth/logout");
-    return response.data;
-};
-
-const getCurrentUser = async (): Promise<User> => {
-    const response = await axiosClient.get("/auth/me");
-    return response.data;
-};
+const getUserByUsername = (username: string, accessToken: string): Promise<AuthUser> =>
+  axiosClient.get(`/api/users/username/${encodeURIComponent(username)}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  }) as unknown as Promise<AuthUser>;
 
 export default {
     login,
-    register,
-    refreshToken,
     logout,
-    getCurrentUser,
+    refreshToken,
+    getUserByUsername,
 };

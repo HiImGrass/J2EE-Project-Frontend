@@ -2,6 +2,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Image } from "./ui/image";
 import authService from "@/features/auth/api/auth.service";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/stores/auth.store";
 
 const AccountControls = [
     {
@@ -20,6 +21,7 @@ const AccountControls = [
 
 export function AccountAvatar() {
     const navigate = useNavigate();
+    const clearAuth = useAuthStore((state) => state.clearAuth);
 
     const handleClickAvatar = (key: string) => {
         switch (key) {
@@ -47,13 +49,14 @@ export function AccountAvatar() {
     }
 
     const logOut = async () => {
+        const refreshToken = localStorage.getItem("refreshToken");
         try {
-            await authService.logout();
+            await authService.logout(refreshToken);
         } catch (error) {
             console.error("Đăng xuất khỏi máy chủ thất bại:", error);
         } finally {
-            localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+            clearAuth();
             navigate("/login", { replace: true });
         }
     }

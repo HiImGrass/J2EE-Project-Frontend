@@ -5,7 +5,8 @@ export const testApiConnection = async (): Promise<boolean> => {
     try {
         console.log('🚀 [Test Axios] Đang kiểm tra kết nối tới Server...');
 
-        await axiosClient.get('/hello');
+        // để tạm
+        await axiosClient.get('api/users');
         return true;
     } catch (error: any) {
         console.error('❌ Chi tiết:', error.message);
