@@ -6,6 +6,7 @@ interface ConfirmationDialogProps {
   description?: string;
   confirmLabel?: string;
   cancelLabel?: string;
+  type?: "cancel" | "confirm";
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -16,6 +17,7 @@ export function ConfirmationDialog({
   description,
   confirmLabel = "Xác nhận",
   cancelLabel = "Hủy",
+  type = "confirm",
   onConfirm,
   onCancel,
 }: ConfirmationDialogProps) {
@@ -39,9 +41,9 @@ export function ConfirmationDialog({
         <h2 id={titleId} className="text-lg font-semibold">
           {title}
         </h2>
-          {description && (
-            <p className="mt-2 text-sm text-muted-foreground">{description}</p>
-          )}
+        {description && (
+          <p className="mt-2 text-sm text-muted-foreground">{description}</p>
+        )}
         <div className="mt-6 flex justify-end gap-3">
           <button
             type="button"
@@ -52,7 +54,10 @@ export function ConfirmationDialog({
           </button>
           <button
             type="button"
-            className="rounded-md bg-destructive text-white px-4 py-2 text-sm font-medium text-destructive-foreground hover:opacity-90"
+            className={`rounded-md px-4 py-2 text-sm text-white font-medium hover:opacity-90 ${type === "cancel"
+                ? "bg-destructive text-destructive-foreground"
+                : "bg-primary text-primary-foreground"
+              }`}
             onClick={onConfirm}
           >
             {confirmLabel}

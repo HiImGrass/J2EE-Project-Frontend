@@ -1,19 +1,14 @@
-import { useRef, useState } from 'react';
-import { Volume2 } from 'lucide-react';
-// TODO: chỉnh lại đường dẫn import cho khớp với project của bạn
+import { useState } from 'react';
+import { AudioButton } from '@/components/AudioButton';
 import { cn } from '@/lib/utils';
 import { ImgButton } from '@/components/ui/ImgButton';
 import type { Vocabulary } from '@/types/student-study.type';
-
-export interface AudioOption {
-    id: string;
-    audioUrl: string;
-}
+import type { Answer } from '@/types/question.type';
 
 interface TextToAudioExerciseProps {
     word: Vocabulary;
-    options: AudioOption[];
-    onCheck?: (selectedId: string) => void;
+    options: Answer[];
+    onCheck?: (selectedId: number) => void;
     onSkip?: () => void;
     className?: string;
 }
@@ -25,22 +20,7 @@ export const TextToAudioExercise = ({
     onSkip,
     className = '',
 }: TextToAudioExerciseProps) => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
-    const [playingId, setPlayingId] = useState<string | null>(null);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-
-    const handleSelect = (option: AudioOption) => {
-        setSelectedId(option.id);
-
-        // Dừng âm thanh đang phát (nếu có) rồi phát âm thanh của đáp án vừa chọn
-        audioRef.current?.pause();
-        const audio = new Audio(option.audioUrl);
-        audioRef.current = audio;
-        setPlayingId(option.id);
-        audio.onended = () => setPlayingId((prev) => (prev === option.id ? null : prev));
-        audio.onerror = () => setPlayingId((prev) => (prev === option.id ? null : prev));
-        audio.play().catch(() => setPlayingId(null));
-    };
+    const [selectedId, setSelectedId] = useState<number | null>(null);
 
     const handleCheck = () => {
         if (!selectedId) return;
@@ -52,7 +32,6 @@ export const TextToAudioExercise = ({
             <h2 className="text-lg font-semibold text-center">Chọn âm thanh đúng</h2>
 
             <div className="flex flex-col gap-8 w-full items-center">
-                {/* Nội dung câu hỏi: từ + từ loại */}
                 <div className="flex flex-row items-center justify-center gap-3 flex-wrap">
                     <span className="text-xl font-semibold text-center">{word.word}</span>
                     <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
@@ -60,34 +39,29 @@ export const TextToAudioExercise = ({
                     </span>
                 </div>
 
-                {/* Các đáp án dạng âm thanh */}
                 <div className="flex flex-col gap-3 w-full max-w-md">
                     {options.map((option, index) => {
                         const isSelected = option.id === selectedId;
-                        const isPlaying = option.id === playingId;
                         return (
-                            <button
+                            <div
                                 key={option.id}
-                                type="button"
-                                onClick={() => handleSelect(option)}
-                                aria-label={`Đáp án ${index + 1}`}
-                                aria-pressed={isSelected}
                                 className={cn(
-                                    'flex w-full cursor-pointer flex-row items-center gap-3 rounded-lg border-2 px-4 py-3 transition-colors',
-                                    isSelected
-                                        ? 'border-primary bg-primary/10'
-                                        : 'border-gray-300 hover:border-primary/50'
+                                    'flex w-full flex-row items-center gap-3 rounded-lg border-2 px-4 py-3 transition-colors',
+                                    isSelected ? 'border-primary bg-primary/10' : 'border-gray-300 hover:border-primary/50'
                                 )}
                             >
-                                <Volume2
-                                    className={cn(
-                                        'h-6 w-6 shrink-0',
-                                        isSelected ? 'text-primary' : 'text-gray-500',
-                                        isPlaying && 'animate-pulse'
-                                    )}
-                                />
-                                <span className="font-medium">Đáp án {index + 1}</span>
-                            </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedId(option.id)}
+                                    aria-label={`Đáp án ${index + 1}`}
+                                    aria-pressed={isSelected}
+                                    className="flex min-w-0 flex-1 cursor-pointer flex-row items-center gap-3 text-left font-medium"
+                                >
+                                    <span className="h-6 w-6 shrink-0 rounded-full border border-current" aria-hidden="true" />
+                                    <span>Đáp án {index + 1}</span>
+                                </button>
+                                <AudioButton publicId={option.answerAudioUrl ?? ''} aria-label={`Phát âm đáp án ${index + 1}`} />
+                            </div>
                         );
                     })}
                 </div>

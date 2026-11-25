@@ -1,11 +1,10 @@
-// ProtectedRoute.tsx
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuthStore } from '@/stores/auth.store';
 
 export default function ProtectedRoute() {
-  const token = localStorage.getItem('accessToken')
-  const isAuthenticated = !!token // Thay bằng logic kiểm tra token/auth
+  const accessToken = useAuthStore((state) => state.accessToken);
 
-  if (!isAuthenticated) {
+  if (!accessToken) {
     return <Navigate to="/login" replace />;
   }
 

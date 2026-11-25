@@ -1,34 +1,63 @@
-// import axios from 'axios'
-
-// const api = axios.create({
-//     baseURL: import.meta.env.VITE_APP_API_URL,
-//     timeout: 10000,
-//     headers: {
-//         "Content-Type": "application/json"
-//     },
-// });
-
-// export default api;
-
-import axios from 'axios';
+import axios, { type InternalAxiosRequestConfig } from 'axios';
+import type { RefreshTokenResponse } from '@/features/auth/types/auth.types';
+import { useAuthStore } from '@/stores/auth.store';
 
 export const axiosClient = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:8080",
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    timeout: 10000,
-    withCredentials: false, // tạm đặt false
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 10000,
+  withCredentials: false,
 });
 
-// debug
-console.log("Current API Base URL:", axiosClient.defaults.baseURL);
+interface RetriableRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
 
-// Response interceptor để bóc tách data gọn hơn
+let refreshRequest: Promise<RefreshTokenResponse> | null = null;
+
+axiosClient.interceptors.request.use((config) => {
+  const accessToken = useAuthStore.getState().accessToken;
+  if (accessToken && !config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+  return config;
+});
+
 axiosClient.interceptors.response.use(
-    (response) => response.data,
-    (error) => {
-        // Xử lý lỗi chung (token hết hạn, 401, 500,...)
-        return Promise.reject(error?.response?.data || error);
+  (response) => response.data,
+  async (error) => {
+    const originalRequest = error.config as RetriableRequestConfig | undefined;
+    const refreshToken = localStorage.getItem('refreshToken');
+    const isRefreshRequest = originalRequest?.url?.includes('/api/auth/refresh');
+
+    if (error.response?.status !== 401 || !originalRequest || originalRequest._retry || isRefreshRequest || !refreshToken) {
+      return Promise.reject(error?.response?.data || error);
     }
+
+    originalRequest._retry = true;
+
+    try {
+      refreshRequest ??= axios
+        .post<RefreshTokenResponse>(
+          `${axiosClient.defaults.baseURL}/api/auth/refresh`,
+          { refreshToken },
+          { headers: { 'Content-Type': 'application/json' }, timeout: axiosClient.defaults.timeout },
+        )
+        .then((response) => response.data)
+        .finally(() => {
+          refreshRequest = null;
+        });
+
+      const tokens = await refreshRequest;
+      useAuthStore.getState().setAccessToken(tokens.accessToken);
+      localStorage.setItem('refreshToken', tokens.refreshToken);
+      originalRequest.headers.Authorization = `Bearer ${tokens.accessToken}`;
+
+      return axiosClient(originalRequest);
+    } catch (refreshError) {
+      localStorage.removeItem('refreshToken');
+      useAuthStore.getState().clearAuth();
+      return Promise.reject(refreshError);
+    }
+  },
 );

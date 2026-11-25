@@ -13,6 +13,7 @@ interface StudyFlowProps {
   completion?: ReactNode;
   transitionMessage?: string;
   onExit: () => void;
+  onWordMarkedKnown?: (wordId: number) => void;
 }
 
 /** Shared entry transition, progress, and slide navigation for study activities. */
@@ -21,6 +22,7 @@ export function StudyFlow({
   completion,
   transitionMessage,
   onExit,
+  onWordMarkedKnown,
 }: StudyFlowProps) {
   const [showTransition, setShowTransition] = useState(true);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
@@ -47,11 +49,12 @@ export function StudyFlow({
 
   const goNext = useCallback(() => goTo(index + 1), [goTo, index]);
   const goNextWord = useCallback(() => {
+    if (current?.type === "flashcard") onWordMarkedKnown?.(current.data.id);
     const nextWordIndex = steps.findIndex(
       (step, stepIndex) => stepIndex > index && step.type === "flashcard",
     );
     goTo(nextWordIndex === -1 ? steps.length : nextWordIndex);
-  }, [goTo, index, steps]);
+  }, [current, goTo, index, onWordMarkedKnown, steps]);
 
   useEffect(() => () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -108,6 +111,7 @@ export function StudyFlow({
           description="Tiến trình học hiện tại có thể không được lưu."
           cancelLabel="Ở lại"
           confirmLabel="Thoát"
+          type="cancel"
           onCancel={() => setShowExitConfirmation(false)}
           onConfirm={onExit}
         />

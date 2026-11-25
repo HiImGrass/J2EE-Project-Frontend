@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const MAX_WORDS_PER_SESSION = 10;
-const TEST_COUNTDOWN_SECONDS = 10; // Tạm 1 phút để test
+const TEST_COUNTDOWN_SECONDS = 5;
 
 function formatTime(totalSeconds: number): string {
     const h = Math.floor(totalSeconds / 3600);
