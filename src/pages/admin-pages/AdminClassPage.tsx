@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ActionBar } from '@/features/admin/components/ActionBar'
-import { ClassCard } from '@/features/admin/components/ClassCard'
+import { ActionBar } from '@/features/admin/shared/components/ActionBar'
+import { ClassCard } from '@/features/admin/manage-classes/components/ClassCard'
 import { mockClasses, mockUsers } from '@/features/admin/mockData'
 
 export default function AdminClassPage() {

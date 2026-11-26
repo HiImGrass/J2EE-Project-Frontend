@@ -2,8 +2,8 @@ import { useState, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import BackButton from '@/components/BackButton'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { LearningPathCard } from '@/features/admin/components/LearningPathCard'
-import { StudentListCard } from '@/features/admin/components/StudentListCard'
+import { LearningPathCard } from '@/features/admin/manage-learning-path/components/LearningPathCard'
+import { StudentListCard } from '@/features/admin/manage-classes/components/StudentListCard'
 import {
   mockClasses,
   mockClassStudents,
@@ -13,8 +13,8 @@ import {
 import type { User } from '@/types/user.type'
 import type { ClassStudent } from '@/features/admin/types/class.types'
 import {CheckCircle2 } from 'lucide-react'
-import { ActionBar } from '@/features/admin/components/ActionBar'
-import { AddStudentDialog } from '@/features/admin/components/AddStudentDialog'
+import { ActionBar } from '@/features/admin/shared/components/ActionBar'
+import { AddStudentDialog } from '@/features/admin/manage-classes/components/AddStudentDialog'
 
 export default function AdminClassDetailPage() {
   const { id } = useParams<{ id: string }>()

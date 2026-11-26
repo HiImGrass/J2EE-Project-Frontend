@@ -53,14 +53,14 @@ export function ClassCard({
 
         <div className="flex flex-col gap-1 text-sm text-muted-foreground">
           <span>
-            Giáo viên: <span className="font-medium text-primary">{resolvedTeacherName}</span>
+            Giáo viên: <span className="font-medium text-primary-text">{resolvedTeacherName}</span>
           </span>
           <span>
-            Sĩ số: <span className="font-medium text-primary">{classItem.number_of_students}</span>
+            Sĩ số: <span className="font-medium text-primary-text">{classItem.number_of_students}</span>
           </span>
           <span>
             Ngày tạo:{' '}
-            <span className="font-medium text-primary">
+            <span className="font-medium text-primary-text">
               {formatCreatedAt(classItem.created_at)}
             </span>
           </span>
@@ -71,14 +71,14 @@ export function ClassCard({
         <button
           type="button"
           onClick={handleDetail}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Xem chi tiết
         </button>
         <button
           type="button"
           onClick={() => onEdit?.(classItem.id)}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Sửa
         </button>
