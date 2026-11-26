@@ -24,6 +24,8 @@ import { RegisterPage } from '@/pages/client-pages/RegisterPage'
 import { VocabularyTrainingPage } from '@/pages/client-pages/VocabularyTrainingPage'
 import VocabularyPracticePage from '@/pages/client-pages/VocabularyPracticePage'
 import AdminAccount from '@/pages/admin-pages/AdminAccount'
+import AdminClassPage from '@/pages/admin-pages/AdminClassPage'
+import AdminClassDetailPage from '@/pages/admin-pages/AdminClassDetailPage'
 
 export const router = createBrowserRouter([
   {
@@ -52,8 +54,8 @@ export const router = createBrowserRouter([
               },
               {
                 path: 'practice-vocabulary',
-                element: <VocabularyPracticePage/>
-              }
+                element: <VocabularyPracticePage />,
+              },
             ],
           },
           // các thành phần giao diện khác sẽ nằm trong đây
@@ -78,9 +80,17 @@ export const router = createBrowserRouter([
                   { index: true, element: <DashboardPage /> }, // /admin
                   { path: 'learning-paths', element: <AdminLearningPathPage /> },
                   { path: 'learning-paths/:id/topics', element: <AdminTopicPage /> },
-                  { path: 'learning-paths/:id/topics/:topicId/vocabularies', element: <AdminVocabPage /> },
-                  { path: 'learning-paths/:id/topics/:topicId/vocabularies/create', element: <AdminVocabCreatePage /> },
+                  {
+                    path: 'learning-paths/:id/topics/:topicId/vocabularies',
+                    element: <AdminVocabPage />,
+                  },
+                  {
+                    path: 'learning-paths/:id/topics/:topicId/vocabularies/create',
+                    element: <AdminVocabCreatePage />,
+                  },
                   { path: 'accounts', element: <AdminAccount /> },
+                  { path: 'classes', element: <AdminClassPage /> },
+                  { path: 'classes/:id', element: <AdminClassDetailPage /> },
                   // Tính năng cho ADMIN
                   {
                     element: <RequireRole allowedRoles={['ADMIN']} />,
