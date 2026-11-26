@@ -20,6 +20,7 @@ export function ListenAndWriteStep(
             <ListenAndWriteExercise
                 audioPublicId={vocab.audioUrl}
                 onCheck={handleCheck}
+                hasResult={result !== null}
             />
 
             {result !== null && (

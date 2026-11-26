@@ -22,6 +22,7 @@ export function FillInBlankStep(
                 // Đổi tên field cho khớp với type Word của bạn
                 word={vocab}
                 onCheck={handleCheck}
+                hasResult={result !== null}
             />
 
             {result !== null && (

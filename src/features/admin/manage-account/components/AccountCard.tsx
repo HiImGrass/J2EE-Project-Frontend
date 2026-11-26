@@ -60,7 +60,7 @@ export function AccountCard({
             className="size-9 rounded-full border border-border/60 object-cover"
           />
         ) : (
-          <div className="flex size-9 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary">
+          <div className="flex size-9 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-xs font-semibold text-primary-text">
             {getInitials(fullName)}
           </div>
         )}
@@ -119,7 +119,7 @@ export function AccountCard({
         <button
           type="button"
           onClick={() => onViewDetail?.(account)}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Xem chi tiết
         </button>

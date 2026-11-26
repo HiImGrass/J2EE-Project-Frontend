@@ -164,14 +164,14 @@ export function RegisterForm() {
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-200"></div>
         </div>
-        <span className="relative bg-white px-3 text-[12px] text-gray-400">Hoặc</span>
+        <span className="relative bg-card px-3 text-[12px] text-muted-foreground">Hoặc</span>
       </div>
 
       {/* Nút Google */}
       <button
         id="google-register-btn"
         type="button"
-        className="flex w-full items-center justify-center gap-2 rounded border border-gray-200 bg-white py-2.5 text-[13px] font-medium text-gray-600 shadow-sm transition-colors hover:bg-gray-50 active:scale-[0.98]"
+        className="flex w-full items-center justify-center gap-2 rounded border border-border bg-card py-2.5 text-[13px] font-medium text-card-foreground shadow-sm transition-colors hover:bg-muted active:scale-[0.98]"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
           <path

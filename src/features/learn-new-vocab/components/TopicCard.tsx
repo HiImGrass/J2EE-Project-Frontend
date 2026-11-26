@@ -1,6 +1,7 @@
 import { Image } from "@/components/ui/image";
 import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 interface TopicCardProps {
@@ -11,11 +12,11 @@ interface TopicCardProps {
     description: string;
 }
 
-const topicCardVariants = cva("flex w-full px-5 py-4 rounded-xl gap-4 items-center shadow-lg shadow-gray-400", {
+const topicCardVariants = cva("flex w-full px-5 py-4 rounded-xl gap-4 items-center shadow-lg shadow-primary-shadow", {
     variants: {
         status: {
-            LEARNED: "bg-gradient-to-r from-light-green-background from-50% to-green-background to-100%",
-            UNLEARNED: "bg-gray-400",
+            LEARNED: "bg-gradient-to-r from-primary/90 from-50% to-primary/80 to-100%",
+            UNLEARNED: "bg-card-background",
         },
     },
     defaultVariants: {
@@ -35,10 +36,10 @@ export function TopicCard({ id, image_url, status, topic_name, description }: To
                 topicCardVariants({ status }),
                 status === "LEARNED" ? "cursor-pointer" : "pointer-events-none"
             )}
-            onClick={status === "LEARNED" ? handleClickCard : undefined}
+            onClick={handleClickCard}
         >
             <div className={cn(
-                "size-18 rounded-full overflow-hidden outline-2 outline-white outline-offset-4",
+                "size-18 rounded-full overflow-hidden outline-2 outline-white",
                 status === "UNLEARNED" && "grayscale"
             )}>
                 <Image
@@ -47,13 +48,17 @@ export function TopicCard({ id, image_url, status, topic_name, description }: To
                 />
             </div>
             <div className="flex-col">
-                <div className="text-white text-xl font-medium bg-green-b">
+                <div className={cn(`text-white text-xl font-medium bg-green-b`, status === "UNLEARNED" && "text-foreground")}>
                     {topic_name}
                 </div>
-                <div className="text-white text-sm">
+                <div className={cn(`text-white text-sm`, status === "UNLEARNED" && "text-foreground")}>
                     {description}
                 </div>
             </div>
+            <ChevronRight
+                aria-hidden="true"
+                className={cn("ml-auto size-5 shrink-0", status === "LEARNED" ? "text-white" : "text-muted-foreground")}
+            />
         </div>
     );
 }

@@ -28,32 +28,37 @@ export function SideBar({ menuGroups }: SideBarProps) {
   }
 
   return (
-    <nav className="flex w-full flex-col gap-4 px-2 py-4">
+    <nav className="flex w-full flex-col gap-8 px-2 py-4">
       {menuGroups.map((group) => (
-        <div key={group.groupKey} className="flex flex-col gap-4">
-          <span className="mb-1 px-3 text-[14px] font-semibold tracking-wider text-muted-foreground uppercase select-none">
-            {group.groupLabel}
-          </span>
-          {group.items.map((item) => {
-            const isActive = location.pathname === item.path
-            return (
-              <button
-                key={item.key}
-                onClick={() => handleNavigate(item.path)}
-                className={cn(
-                  'flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium transition-all duration-150',
-                  isActive
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-foreground hover:bg-accent hover:text-accent-foreground',
-                )}
-              >
-                <span className="size-4 shrink-0">
-                  <Icon name={item.icon} />
-                </span>
-                <span className="truncate">{item.text}</span>
-              </button>
-            )
-          })}
+        <div key={group.groupKey} className="flex flex-col gap-2">
+          <div className='flex items-center'>
+            <div className='h-px w-4 bg-sidebar-border mb-1'></div>
+            <span className="mb-1 px-3 text-xs  tracking-wider text-muted-foreground uppercase select-none">
+              {group.groupLabel}
+            </span>
+          </div>
+          <div className='flex flex-col px-2 gap-2'>
+            {group.items.map((item) => {
+              const isActive = location.pathname === item.path
+              return (
+                <button
+                  key={item.key}
+                  onClick={() => handleNavigate(item.path)}
+                  className={cn(
+                    'flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm  transition-all duration-150',
+                    isActive
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-foreground hover:bg-accent hover:text-accent-foreground',
+                  )}
+                >
+                  <span className="size-4 shrink-0">
+                    <Icon name={item.icon} />
+                  </span>
+                  <span className="truncate">{item.text}</span>
+                </button>
+              )
+            })}
+          </div>
         </div>
       ))}
     </nav>

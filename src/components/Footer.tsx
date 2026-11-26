@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ImgButton } from './ui/ImgButton';
+import { FooterOptionButton } from './FooterOptionButton';
 import { useNavigate } from 'react-router-dom';
 
 const MenuItems = [
@@ -43,12 +43,12 @@ export function Footer() {
                 MenuItems.map((item, key) => {
                     const isActive = activeKey === item.key;
                     return (
-                        <ImgButton
+                        <FooterOptionButton
                             key={key}
                             text={item.text}
                             iconName={item.name}
-                            iconPosition={'top'}
-                            className={`px-4 py-2 flex-1 hover:text-primary ${isActive ? "text-primary" : ""}`}
+                            selected={isActive}
+                            className="px-4 flex-1"
                             onClick={() => handleSelectionItem(item.key, item.path)}
                         />
                     )

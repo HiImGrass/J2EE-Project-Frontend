@@ -7,11 +7,11 @@ type MemoryLevelChartProps = {
 };
 
 const BAR_COLORS = [
-    "bg-[#D1D8F1]",
-    "bg-[#A3B1E3]",
-    "bg-[#758AD4]",
-    "bg-[#4763C6]",
-    "bg-[#193CB8]",
+    "bg-primary/60",
+    "bg-primary/70",
+    "bg-primary/80",
+    "bg-primary/90",
+    "bg-primary/100",
 ] as const;
 
 export function MemoryLevelChart({ counts, className = "" }: MemoryLevelChartProps) {
@@ -20,9 +20,12 @@ export function MemoryLevelChart({ counts, className = "" }: MemoryLevelChartPro
 
     return (
         <div className="flex flex-col w-full gap-8 rounded-xl border-2 p-4 border-slate-300">
-            <div className="flex justify-between">
-                <div className="font-medium">Từ vựng theo mức nhớ</div>
-                <div className="bg-primary text-white p-2 font-medium rounded-md">{total}</div>
+            <div className="flex justify-between items-center">
+                <div className="flex flex-col">
+                    <div className="text-lg font-medium">Từ vựng theo mức nhớ</div>
+                    <div className="text-sm text-muted-foreground">5 cấp độ ghi nhớ từ vựng</div>
+                </div>
+                <div className="bg-primary/90 text-white p-2 font-medium rounded-md">Tổng: {total}</div>
             </div>
             <div
                 className={`w-full ${className}`}
@@ -33,7 +36,7 @@ export function MemoryLevelChart({ counts, className = "" }: MemoryLevelChartPro
                 <div className="grid h-56 grid-cols-5 items-end gap-2.5 border-b border-slate-200">
                     {counts.map((n, i) => (
                         <div key={i} className="flex h-full min-w-0 flex-col items-center justify-end">
-                            <span className="mb-1.5 text-[15px] font-semibold tabular-nums text-slate-800">
+                            <span className="mb-1.5 text-[15px] font-semibold tabular-nums text-primary-text">
                                 {n}
                             </span>
                             <div

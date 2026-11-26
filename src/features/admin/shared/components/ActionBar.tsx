@@ -21,7 +21,7 @@ export function ActionBar({
 }: ActionBarProps) {
   return (
     <div
-      className={cn('flex items-center justify-between gap-3 rounded-lg bg-white p-2.5', className)}
+      className={cn('flex items-center justify-between gap-3 rounded-lg bg-action-card p-2.5', className)}
     >
       <div className="relative flex items-center">
         <div className="pointer-events-none absolute right-3 size-5 text-muted-foreground">
@@ -35,7 +35,7 @@ export function ActionBar({
           className={cn(
             'text-md h-9 w-64 rounded-md border border-input bg-background pr-3 pl-3',
             'placeholder:text-muted-foreground',
-            'focus:ring-2 focus:ring-ring focus:ring-offset-1 focus:outline-none',
+            'focus:ring focus:ring-primary-text focus:ring-offset-1 focus:outline-none',
             'transition-shadow duration-150',
           )}
         />

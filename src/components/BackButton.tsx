@@ -19,6 +19,7 @@ function BackButton({
             iconName={iconName}
             iconSize='sm'
             text=""
+            className="text-foreground"
             onClick={handleGoBack}
         />
     );

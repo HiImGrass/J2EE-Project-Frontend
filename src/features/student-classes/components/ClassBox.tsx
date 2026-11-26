@@ -37,7 +37,7 @@ export function ClassBox({
                 // hoặc src="/path/to/bg.jpg"
                 aspect="auto"
                 objectFit="cover"
-                className="absolute inset-0 z-0" // Phủ kín thẻ cha và nằm ở lớp dưới cùng
+                className="absolute inset-0 z-0 opacity-90" // Phủ kín thẻ cha và nằm ở lớp dưới cùng
             />
 
             {/* 2. Lớp phủ tối (Dark Overlay) giúp chữ dễ đọc hơn nếu ảnh sáng */}

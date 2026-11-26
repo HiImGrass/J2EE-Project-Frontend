@@ -28,7 +28,7 @@ const renderExample = (example: string, word: string) => {
 
 // Style chung cho 2 mặt thẻ: chồng lên nhau, ẩn mặt lưng khi bị lật
 const FACE =
-    'absolute inset-0 p-6 bg-gray-100 rounded-2xl [backface-visibility:hidden] [-webkit-backface-visibility:hidden] shadow-xl';
+    'absolute inset-0 p-6 bg-card text-card-foreground rounded-2xl [backface-visibility:hidden] [-webkit-backface-visibility:hidden] shadow-xl';
 
 export const FlashCard = ({ vocabulary }: FlashCardProps) => {
     const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -59,9 +59,13 @@ export const FlashCard = ({ vocabulary }: FlashCardProps) => {
                             />
                         </div>
 
-                        <div className="flex flex-row gap-4 items-center">
-                            <AudioButton publicId={vocabulary.audioUrl ?? ''} />
+                        <div className="flex flex-row gap-1 items-center">
                             <AudioButton
+                                className='bg-background size-12 p-2 rounded-md border-2'
+                                publicId={vocabulary.audioUrl ?? ''}
+                            />
+                            <AudioButton
+                                className='bg-background size-12 p-2 rounded-md border-2'
                                 publicId={vocabulary.audioUrl ?? ''}
                                 playbackRate={0.7}
                                 iconName="snail"

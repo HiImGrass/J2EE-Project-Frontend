@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { ActionBar } from '@/features/admin/components/ActionBar'
-import { AccountCard } from '@/features/admin/components/AccountCard'
+import { ActionBar } from '@/features/admin/shared/components/ActionBar'
+import { AccountCard } from '@/features/admin/manage-account/components/AccountCard'
 import { mockUsers } from '@/features/admin/mockData'
 import type { User } from '@/types/user.type'
 import { X, Mail, Phone, Shield, Calendar, Clock, CheckCircle2, AlertCircle } from 'lucide-react'
@@ -92,7 +92,7 @@ export default function AdminAccount() {
   ]
 
   return (
-    <div className="flex flex-col gap-4 px-12 pt-6 pb-12">
+    <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden px-12 pt-6 pb-4">
       {/* toast */}
       {notification && (
         <div className="fixed top-6 right-6 z-50 flex items-center gap-2 rounded-lg bg-foreground px-4 py-3 text-sm font-medium text-background shadow-lg transition-all">
@@ -139,9 +139,9 @@ export default function AdminAccount() {
         })}
       </div>
 
-      <div className="overflow-hidden rounded-lg bg-card shadow-xs">
-        <div className="overflow-x-auto">
-          <div className="min-w-240">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg bg-card shadow-xs">
+        <div className="flex min-h-0 flex-1 flex-col overflow-x-auto">
+          <div className="flex min-h-0 min-w-240 flex-1 flex-col">
             <div className="grid grid-cols-[56px_1.4fr_1.6fr_1.7fr_1.3fr_1.1fr_1.1fr_1fr] items-center gap-3 border-b border-border bg-card px-6 py-3.5">
               <span className="text-sm font-medium text-muted-foreground">Avatar</span>
               <span className="text-sm font-medium text-muted-foreground">Username</span>
@@ -153,6 +153,7 @@ export default function AdminAccount() {
               <span className="text-sm font-medium text-muted-foreground">Hành động</span>
             </div>
 
+            <div className="min-h-0 flex-1 overflow-y-auto">
             {filtered.map((account) => (
               <AccountCard
                 key={account.id}
@@ -169,6 +170,7 @@ export default function AdminAccount() {
                 </p>
               </div>
             )}
+            </div>
           </div>
         </div>
       </div>

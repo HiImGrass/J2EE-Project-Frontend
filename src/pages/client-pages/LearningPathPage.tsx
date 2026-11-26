@@ -1,6 +1,7 @@
 import { StudentTitleCard } from "@/components/StudentTitleCard";
 import { TitleLine } from "@/components/TitleLine";
 import { TopicCard } from "@/features/learn-new-vocab/components/TopicCard";
+import { LearningPathProgressBar } from "@/features/study/components/LearningPathProgressBar";
 
 interface LearningPathPageProp {
     teacherName?: string,
@@ -174,19 +175,25 @@ export function LearningPathPage({
 
 }: LearningPathPageProp) {
     return (
-        <div className="flex flex-col items-center px-3 py-3 gap-3">
+        <div className="flex flex-col items-center px-3 py-3 gap-8">
             <div className="flex flex-col w-full gap-2">
                 <StudentTitleCard title={"LUYỆN THI IELTS KHÓA 25"} />
-                <div className="flex w-full justify-between gap-2">
+                <div className="flex flex-col w-full justify-between gap-2 px-1">
                     <div className="flex gap-1 min-w-0">
-                        <div className="text-muted-foreground text-nowrap">GV:</div>
-                        <div className="text-primary font-semibold truncate">{teacherName}</div>
+                        <div className=" text-nowrap">GV:</div>
+                        <div className="text-primary-text font-semibold truncate">{teacherName}</div>
                     </div>
-                    <div className="flex gap-1">
-                        <div className="text-muted-foreground text-nowrap">Tiến độ:</div>
-                        <div className="text-primary font-semibold">3</div>
-                        <div className="text-muted-foreground text-nowrap">/ 30</div>
+                    <div className="flex gap-1 justify-between">
+                        <div className="text-nowrap">Tiến độ:</div>
+                        <div className="flex gap-2">
+                            <div className="flex">
+                                <div className="text-primary-text font-semibold">3</div>
+                                <div className=" text-nowrap">/30</div>
+                            </div>
+                            <div>chủ đề</div>
+                        </div>
                     </div>
+                    <LearningPathProgressBar current={3} total={30} />
                 </div>
 
             </div>

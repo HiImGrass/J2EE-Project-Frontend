@@ -37,14 +37,14 @@ export function StudyVocabularySaveCard({ vocabularies, knownWordIds, onSave }: 
         Chọn từ bạn muốn lưu vào Sổ tay
       </h2>
 
-      <div className="min-h-0 flex-1 rounded-2xl bg-gray-100 p-3">
+      <div className="min-h-0 flex-1 rounded-2xl bg-muted p-3">
         <ScrollArea className="h-full">
           <ul className="flex flex-col gap-3 pr-3">
             {vocabularies.map((vocab) => (
               <li key={vocab.id} className="flex items-center gap-3">
                 <div className="flex w-28 shrink-0 flex-col">
                   <span className="font-medium">{vocab.word}</span>
-                  <span className="text-sm text-gray-500">{vocab.partOfSpeech}</span>
+                  <span className="text-sm text-muted-foreground">{vocab.partOfSpeech}</span>
                 </div>
                 <span className="flex-1 text-sm">{vocab.meaning}</span>
                 <Checkbox

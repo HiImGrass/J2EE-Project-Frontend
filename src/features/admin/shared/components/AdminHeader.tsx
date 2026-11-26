@@ -1,5 +1,6 @@
 import { AccountAvatar } from '@/components/AccountAvatar'
 import { Icon } from '@/components/ui/icon'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 interface AdminHeaderProps {
   searchPlaceholder?: string
@@ -20,6 +21,7 @@ export function AdminHeader({ searchPlaceholder = 'Search' }: AdminHeaderProps) 
       </div>
 
       <div className="flex items-center gap-2">
+        <ThemeToggle />
         <AccountAvatar />
       </div>
     </header>

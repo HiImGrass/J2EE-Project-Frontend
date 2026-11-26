@@ -15,6 +15,7 @@ export function useLogin() {
     onSuccess: ({ tokens, user }) => {
       setAuth(tokens.accessToken, user);
       localStorage.setItem("refreshToken", tokens.refreshToken);
+      localStorage.setItem("authUsername", user.username);
     },
   });
 }
