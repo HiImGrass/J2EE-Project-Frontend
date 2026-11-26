@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "@/stores/auth.store";
 
 type Role = "ADMIN" | "TEACHER" | "STUDENT";
 
@@ -7,29 +8,16 @@ interface RequireRoleProps {
 }
 
 export const RequireRole = ({ allowedRoles }: RequireRoleProps) => {
-  // MOCK DATA
-  const mockUser: { id: string; name: string; role: Role } | null = {
-    id: "1",
-    name: "Nguyễn Văn A",
-    role: "ADMIN",
-  };
+  const user = useAuthStore((state) => state.user);
+  const role = user?.role?.toUpperCase() as Role | undefined;
 
-  // 1. Nếu chưa đăng nhập -> Chuyển hướng về trang Login
-  if (!mockUser) {
+  if (!user || !role) {
     return <Navigate to="/login" replace />;
   }
 
-  // 2. Kiểm tra xem Role của user có được phép truy cập không
-  const hasPermission = allowedRoles.includes(mockUser.role);
-
-  if (!hasPermission) {
-    // Nếu không đủ quyền -> Chuyển hướng về trang mặc định tương ứng với Role của họ
-    if (mockUser.role === "STUDENT") {
-      return <Navigate to="/" replace />;
-    }
-    return <Navigate to="/admin" replace />;
+  if (!allowedRoles.includes(role)) {
+    return <Navigate to={role === "STUDENT" ? "/" : "/student-classes"} replace />;
   }
 
-  // 3. Đúng quyền -> Cho phép render các Route con bên trong
   return <Outlet />;
 };

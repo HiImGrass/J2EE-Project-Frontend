@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 export function LoginForm() {
-  const [username, setUsername] = useState('student01')
+  const [username, setUsername] = useState('admin01')
   const [password, setPassword] = useState('123456')
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
@@ -13,13 +13,16 @@ export function LoginForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     loginMutation.mutate({ username, password }, {
-      onSuccess: () => navigate('/student-classes'),
+      onSuccess: ({ user }) => {
+        const role = user.role?.toUpperCase()
+        navigate(role === 'ADMIN' || role === 'TEACHER' ? '/admin' : '/student-classes', { replace: true })
+      },
     })
   }
 
   return (
     <div className="flex w-full flex-col items-center">
-      <h2 className="text-sm font-bold tracking-wider text-[#1c3aa9] uppercase">ĐĂNG NHẬP</h2>
+      <h2 className="text-xl font-semibold tracking-wider text-primary-text uppercase">WELCOME</h2>
       <p className="mt-1 mb-6 text-base text-gray-500">Đăng nhập tài khoản học LA2P</p>
 
       <form onSubmit={handleSubmit} className="w-full space-y-3">
@@ -69,7 +72,7 @@ export function LoginForm() {
         </div>
 
         <div className="flex justify-end">
-          <Link to="#" id="forgot-password-link" className="text-[12px] font-medium text-[#1c3aa9] hover:underline">
+          <Link to="#" id="forgot-password-link" className="text-[12px] font-medium text-primary-text hover:underline">
             Quên mật khẩu?
           </Link>
         </div>
@@ -84,28 +87,28 @@ export function LoginForm() {
           id="login-submit-btn"
           type="submit"
           disabled={loginMutation.isPending}
-          className="w-full rounded bg-[#1c3aa9] py-2.5 text-base font-semibold text-white transition-colors hover:bg-blue-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded bg-primary py-2.5 text-base font-semibold text-white transition-colors hover:bg-blue-800 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {loginMutation.isPending ? 'ĐANG ĐĂNG NHẬP...' : 'ĐĂNG NHẬP'}
+          {loginMutation.isPending ? 'ĐANG ĐĂNG NHẬP' : 'ĐĂNG NHẬP'}
         </button>
       </form>
 
       <div className="mt-4 flex w-full justify-start text-base text-gray-500">
         <span>Bạn chưa có tài khoản?</span>
-        <Link to="/register" id="register-link" className="ml-1 font-medium text-[#1c3aa9] hover:underline">
+        <Link to="/register" id="register-link" className="ml-1 font-medium text-primary-text hover:underline">
           Bắt đầu ngay
         </Link>
       </div>
 
       <div className="relative my-5 w-full text-center">
         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div>
-        <span className="relative bg-white px-3 text-[12px] text-gray-400">Hoặc</span>
+        <span className="relative bg-card px-3 text-[12px] text-muted-foreground">Hoặc</span>
       </div>
 
       <button
         id="google-login-btn"
         type="button"
-        className="flex w-full items-center justify-center gap-2 rounded border border-gray-200 bg-white py-2.5 text-base font-medium text-gray-600 shadow-sm transition-colors hover:bg-gray-50 active:scale-[0.98]"
+        className="flex w-full items-center justify-center gap-2 rounded border border-border bg-card py-2.5 text-base font-medium text-card-foreground shadow-sm transition-colors hover:bg-muted active:scale-[0.98]"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />

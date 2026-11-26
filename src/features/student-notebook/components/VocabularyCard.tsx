@@ -54,14 +54,14 @@ export default function VocabularyCard({
     };
 
     return (
-        <div className="w-full flex flex-col rounded-2xl bg-gray-100 p-3 min-h-0 flex-1">
+        <div className="w-full flex flex-col rounded-2xl bg-muted p-3 min-h-0 flex-1">
             <ScrollArea className="min-h-0 flex-1">
                 <ul className="flex flex-col gap-3 pr-3">
                     {items.map((item) => (
                         <li key={item.id} className="flex items-center gap-3">
                             <div className="flex w-28 shrink-0 flex-col">
                                 <span className="font-medium">{item.word}</span>
-                                <span className="text-sm text-gray-500">{item.partOfSpeech}</span>
+                                <span className="text-sm text-muted-foreground">{item.partOfSpeech}</span>
                             </div>
 
                             <span className="flex-1 text-sm">{item.meaning}</span>

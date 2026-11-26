@@ -55,7 +55,7 @@ export function ConfirmationDialog({
           <button
             type="button"
             className={`rounded-md px-4 py-2 text-sm text-white font-medium hover:opacity-90 ${type === "cancel"
-                ? "bg-destructive text-destructive-foreground"
+                ? "bg-destructive/70 text-destructive-foreground"
                 : "bg-primary text-primary-foreground"
               }`}
             onClick={onConfirm}

@@ -119,7 +119,7 @@ export function AccountCard({
         <button
           type="button"
           onClick={() => onViewDetail?.(account)}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Xem chi tiết
         </button>

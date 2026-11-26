@@ -15,14 +15,15 @@ export function NoteBookPage() {
     }
 
     return (
-        <div className="flex flex-col items-center p-3 gap-6">
+        <div className="flex flex-col items-center p-3 gap-4">
             <StudentTitleCard title={"SỔ TAY CỦA BẠN"} />
 
             <div className="w-full flex flex-col gap-3">
                 <TitleLine
                     title={"Sổ tay ôn tập"}
-                    lineClassName="bg-primary"
-                    textClassName="text-primary"
+                    lineClassName="bg-primary-border"
+                    textClassName="text-blue-foreground"
+                    bgClassName="bg-primary-background"
                 />
                 <NotebookCard
                     count={15}
@@ -34,8 +35,9 @@ export function NoteBookPage() {
             <div className="w-full flex flex-col gap-3">
                 <TitleLine
                     title={"Sổ tay ngủ đông"}
-                    lineClassName="bg-light-green-background"
-                    textClassName="text-light-green-background"
+                    lineClassName="bg-green-border"
+                    textClassName="text-green-foreground"
+                    bgClassName="bg-light-green-background/20"
                 />
                 <NotebookCard
                     count={15}

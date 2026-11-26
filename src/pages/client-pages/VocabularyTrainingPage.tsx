@@ -52,15 +52,20 @@ export function VocabularyTrainingPage() {
     return (
         <div className="flex h-full flex-col items-center gap-3 p-3">
             <StudentTitleCard title={"ÔN TẬP TỪ VỰNG"} />
-            <div className="flex w-full h-full flex-col justify-center items-center gap-3">
+            <div className="py-8 flex w-full flex-col justify-center items-center gap-3">
 
                 <MemoryLevelChart counts={counts} />
 
-                <p>Chuẩn bị ôn tập
-                    <span className="px-1 text-primary font-bold text-lg">
-                        {wordsToReview}
-                    </span>
-                    từ</p>
+                <div className="flex items-center gap-2">
+                    <div className="size-2 rounded-full bg-primary">
+
+                    </div>
+                    <p>Chuẩn bị ôn tập
+                        <span className="px-1 text-primary-text font-bold text-lg">
+                            {wordsToReview}
+                        </span>
+                        từ</p>
+                </div>
 
                 {isReady ? (
                     <ImgButton
@@ -73,7 +78,7 @@ export function VocabularyTrainingPage() {
                         iconName="alarm-clock"
                         text={formatTime(remaining)}
                         disabled
-                        className="text-white justify-center rounded-lg px-6 py-2 bg-slate-400 cursor-default gap-2 tabular-nums"
+                        className="text-white justify-center rounded-lg px-6 py-2 bg-card-background cursor-default gap-2 tabular-nums"
                     />
                 )}
             </div>

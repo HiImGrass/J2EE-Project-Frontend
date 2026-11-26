@@ -22,6 +22,11 @@ const AccountControls = [
 export function AccountAvatar() {
     const navigate = useNavigate();
     const clearAuth = useAuthStore((state) => state.clearAuth);
+    const user = useAuthStore((state) => state.user);
+    const role = user?.role?.toUpperCase();
+    const accountControls = AccountControls.filter(
+        (item) => item.key !== "my_class" || (role !== "ADMIN" && role !== "TEACHER"),
+    );
 
     const handleClickAvatar = (key: string) => {
         switch (key) {
@@ -56,6 +61,7 @@ export function AccountAvatar() {
             console.error("Đăng xuất khỏi máy chủ thất bại:", error);
         } finally {
             localStorage.removeItem("refreshToken");
+            localStorage.removeItem("authUsername");
             clearAuth();
             navigate("/login", { replace: true });
         }
@@ -68,7 +74,7 @@ export function AccountAvatar() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
                 {
-                    AccountControls.map((item) => {
+                    accountControls.map((item) => {
                         return (
                             <DropdownMenuItem key={item.key} className="px-4 py-2 active:bg-accent" onClick={() => handleClickAvatar(item.key)}>
                                 {item.text}

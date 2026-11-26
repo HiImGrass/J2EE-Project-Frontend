@@ -9,6 +9,7 @@ interface AudioToTextExerciseProps {
     audioPublicId: string;
     onCheck?: (selectedId: number) => void;
     onSkip?: () => void;
+    hasResult?: boolean;
     className?: string;
 }
 
@@ -17,6 +18,7 @@ export const AudioToTextExercise = ({
     audioPublicId,
     onCheck,
     onSkip,
+    hasResult = false,
     className = '',
 }: AudioToTextExerciseProps) => {
     const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -70,12 +72,12 @@ export const AudioToTextExercise = ({
             </div>
 
             <div className="flex flex-col items-center gap-4">
-                <ImgButton
+                {!hasResult && <ImgButton
                     text="Kiểm tra"
                     onClick={handleCheck}
                     disabled={!selectedId}
                     className="w-fit cursor-pointer rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:opacity-90 active:scale-95 transition disabled:cursor-not-allowed disabled:opacity-50"
-                />
+                />}
 
                 <button
                     type="button"

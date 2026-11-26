@@ -30,13 +30,13 @@ export function VocabCard({ vocab, onViewDetail, onEdit, onDelete, className }: 
       <div className="flex items-center gap-3 text-sm">
         <button
           onClick={() => onViewDetail?.(vocab.id)}
-          className="text-primary transition-colors duration-150 hover:underline"
+          className="text-primary-text transition-colors duration-150 hover:underline"
         >
           Xem chi tiết
         </button>
         <button
           onClick={() => onEdit?.(vocab.id)}
-          className="text-primary transition-colors duration-150 hover:underline"
+          className="text-primary-text transition-colors duration-150 hover:underline"
         >
           Sửa
         </button>

@@ -26,7 +26,7 @@ export function PracticeNotebookPage() {
                     text='Tìm'
                 />
                 <ImgButton
-                    className='rounded-md bg-gray-400 px-5 text-white active:bg-gray-400/80 text-nowrap'
+                    className='rounded-md bg-card-background px-5 text-muted-foreground active:bg-card-background/80 text-nowrap'
                     text='Lưu trữ'
                 />
             </div>

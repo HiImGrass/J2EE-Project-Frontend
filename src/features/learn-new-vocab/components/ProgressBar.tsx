@@ -24,7 +24,7 @@ export const ProgressBar = ({
 
     return (
         <div
-            className={`relative w-full h-4 rounded-full bg-gray-200 ${className}`}
+            className={`relative w-full h-4 rounded-full bg-accent ${className}`}
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={total}
@@ -41,7 +41,7 @@ export const ProgressBar = ({
                 className="absolute top-1/2 -translate-y-1/2 transition-all duration-500 ease-out"
                 style={{ left: iconLeft, width: iconSize, height: iconSize }}
             >
-                <Icon name={iconName} className="bg-white" />
+                <Icon name={iconName} className="bg-background text-primary" />
             </div>
         </div>
     );

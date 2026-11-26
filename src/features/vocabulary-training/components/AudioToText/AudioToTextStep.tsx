@@ -27,6 +27,7 @@ export function AudioToTextStep(
                 audioPublicId={audioUrl ?? vocab.audioUrl ?? ''}
                 onCheck={handleCheck}
                 onSkip={handleSkip}
+                hasResult={result !== null}
             />
 
             {result !== null && (

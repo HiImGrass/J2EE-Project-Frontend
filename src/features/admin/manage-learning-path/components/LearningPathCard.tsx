@@ -19,12 +19,11 @@ export function LearningPathCard({
   return (
     <div
       className={cn(
-        'relative flex items-center justify-between overflow-hidden rounded-xl border border-border bg-card px-6 py-8',
+        'relative flex items-center justify-between overflow-hidden rounded-lg border-l-4 border-primary ring ring-border bg-card px-6 py-8',
         'shadow-sm transition-shadow duration-150 hover:shadow-md',
         className,
       )}
     >
-      <div className="absolute top-0 bottom-0 left-0 w-1 bg-primary" />
       <div className="flex items-stretch gap-4">
         <div className="flex flex-col gap-2.5">
           <span className="text-base leading-tight font-semibold text-foreground">
@@ -39,13 +38,13 @@ export function LearningPathCard({
       <div className="flex items-center gap-3 text-sm">
         <button
           onClick={() => onViewDetail?.(learningPath.id)}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Xem Chi tiết
         </button>
         <button
           onClick={() => onEdit?.(learningPath.id)}
-          className="font-medium text-primary transition-colors duration-150 hover:underline"
+          className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
           Sửa
         </button>

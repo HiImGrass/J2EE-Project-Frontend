@@ -26,12 +26,20 @@ export function ResultSheet({
     if (typeof document === "undefined") return null;
 
     const theme = isCorrect
-        ? { bg: "bg-green-100", title: "text-green-700", btn: "bg-green-500" }
-        : { bg: "bg-red-100", title: "text-red-700", btn: "bg-red-500" };
+        ? {
+              bg: "bg-result-correct-bg",
+              title: "text-result-correct-title",
+              btn: "bg-result-correct-button",
+          }
+        : {
+              bg: "bg-result-incorrect-bg",
+              title: "text-result-incorrect-title",
+              btn: "bg-result-incorrect-button",
+          };
 
     return createPortal(
         <div
-            className={`flex flex-col fixed inset-x-0 bottom-0 z-9999 rounded-t-3xl px-5 pt-3
+            className={`flex flex-col fixed inset-x-3 sm:inset-x-4 bottom-0 z-9999 rounded-t-3xl px-5 pt-3
                 pb-[max(1rem,env(safe-area-inset-bottom))]
                 transition-transform duration-300 ease-out
                 ${theme.bg} ${show ? "translate-y-0" : "translate-y-full"}`}
@@ -57,15 +65,15 @@ export function ResultSheet({
                     <div className="flex flex-col gap-2 pb-4 pt-3">
 
                         <div className="flex items-baseline gap-2">
-                            <span className="text-2xl font-bold text-gray-900">{vocab.word}</span>
-                            <span className="text-sm italic text-gray-500">{vocab.partOfSpeech}</span>
+                            <span className="text-2xl font-bold text-foreground">{vocab.word}</span>
+                            <span className="text-sm italic text-muted-foreground">{vocab.partOfSpeech}</span>
                         </div>
 
-                        <p className="text-gray-600">{vocab.pronunciation}</p>
-                        <p className="font-medium text-gray-800">{vocab.meaning}</p>
+                        <p className="text-muted-foreground">{vocab.pronunciation}</p>
+                        <p className="font-medium text-foreground">{vocab.meaning}</p>
 
-                        <div className="rounded-xl bg-white/60 p-3 text-sm">
-                            <p className="text-gray-800">{vocab.example}</p>
+                        <div className="rounded-xl bg-background/60 p-3 text-sm">
+                            <p className="text-foreground">{vocab.example}</p>
                         </div>
                     </div>
                 </div>

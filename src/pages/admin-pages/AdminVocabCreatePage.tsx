@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import BackButton from '@/components/BackButton'
-import { VocabCreateForm } from '@/features/admin/components/VocabCreateForm'
+import { VocabCreateForm } from '@/features/admin/manage-vocabulary/components/VocabCreateForm'
 import { mockTopics } from '@/features/admin/mockData'
 
 export default function AdminVocabCreatePage() {

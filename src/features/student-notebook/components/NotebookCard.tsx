@@ -19,13 +19,13 @@ const TYPE_CONFIG: Record<NotebookType, {
         label: "Từ ôn tập",
         publicId: "study-FIL_x3htyc",
         borderColor: "border-primary",
-        bgColor: "bg-primary/30",
+        bgColor: "bg-primary/40",
     },
     nguDong: {
         label: "Từ ngủ đông",
         publicId: "sleep-FIL_uqjnda",
         borderColor: "border-light-green-background",
-        bgColor: "bg-light-green-background/30",
+        bgColor: "bg-light-green-background/40",
     },
 };
 
@@ -39,13 +39,14 @@ export const NotebookCard = (
     const config = TYPE_CONFIG[type];
     return (
         <div
-            className={`w-full h-60 relative group rounded-2xl border-2 ${config.borderColor} shadow-lg overflow-hidden`}
+            className={`bg-white/10 w-full h-60 relative group rounded-2xl border-2 ${config.borderColor} shadow-lg overflow-hidden`}
             onClick={() => onClick()}
         >
             <Image
                 publicId={config.publicId}
                 aspect="square"
                 objectFit="cover"
+                className="opacity-100 dark:opacity-40"
             />
 
             <div className={`absolute inset-4 flex flex-col items-center justify-center rounded-xl border-2 border-white ${config.bgColor} shadow-lg text-white select-none`}>

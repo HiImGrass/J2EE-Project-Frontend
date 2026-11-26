@@ -7,12 +7,14 @@ import { useState } from 'react';
 interface ListenAndWriteExerciseProps {
     audioPublicId: string | null;
     onCheck?: (answer: string) => void;
+    hasResult?: boolean;
     className?: string;
 }
 
 export const ListenAndWriteExercise = ({
     audioPublicId,
     onCheck,
+    hasResult = false,
     className = '',
 }: ListenAndWriteExerciseProps) => {
     const [answer, setAnswer] = useState<string>('');
@@ -50,12 +52,12 @@ export const ListenAndWriteExercise = ({
                 />
             </div>
 
-            <ImgButton
+            {!hasResult && <ImgButton
                 text="Kiểm tra"
                 onClick={handleCheck}
                 disabled={!answer.trim()}
                 className="w-fit cursor-pointer rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:opacity-90 active:scale-95 transition disabled:cursor-not-allowed disabled:opacity-50"
-            />
+            />}
         </div>
     );
 };

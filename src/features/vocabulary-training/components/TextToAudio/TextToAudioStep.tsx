@@ -30,6 +30,7 @@ export function TextToAudioStep(
                 options={options}
                 onCheck={handleCheck}
                 onSkip={handleSkip}
+                hasResult={result !== null}
             />
 
             {result !== null && (

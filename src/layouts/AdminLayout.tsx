@@ -1,12 +1,12 @@
 import { NavBar } from '@/components/NavBar'
 import { Outlet } from 'react-router-dom'
 import type { SideBarMenuGroup } from '@/components/SideBar'
-import { AdminHeader } from '@/features/admin/components/AdminHeader'
+import { AdminHeader } from '@/features/admin/shared/components/AdminHeader'
 
 const MenuItems: SideBarMenuGroup[] = [
   {
     groupKey: 'management',
-    groupLabel: '- Quản lý',
+    groupLabel: 'Quản lý',
     items: [
       {
         key: 1,
@@ -24,7 +24,7 @@ const MenuItems: SideBarMenuGroup[] = [
   },
   {
     groupKey: 'administration',
-    groupLabel: '- Quản trị',
+    groupLabel: 'Quản trị',
     items: [
       {
         key: 3,
@@ -44,13 +44,13 @@ const MenuItems: SideBarMenuGroup[] = [
 
 export default function AdminLayout() {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-dvh overflow-hidden bg-background">
       <NavBar menuGroups={MenuItems} />
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <AdminHeader />
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+        <div className="shrink-0"><AdminHeader /></div>
 
-        <main className="flex-1 bg-[#f1f5f9]">
+        <main className="flex min-h-0 flex-1 flex-col overflow-hidden bg-background">
           <Outlet />
         </main>
       </div>

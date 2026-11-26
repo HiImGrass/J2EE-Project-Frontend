@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "LA2P",
+  "short_name": "LA2P",
+  "description": "LA2P learning platform",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#193CB8",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
