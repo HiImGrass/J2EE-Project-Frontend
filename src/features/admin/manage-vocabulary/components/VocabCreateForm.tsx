@@ -36,6 +36,9 @@ export function VocabCreateForm({
   const [imageFileName, setImageFileName] = useState(initialData?.imageFileName || '')
 
   const [submitted, setSubmitted] = useState(false)
+  const addQuestion = () => {
+    navigate('question/create')
+  }
 
   const handleCancel = () => {
     if (onCancel) {
@@ -58,6 +61,7 @@ export function VocabCreateForm({
       audioFileName: audioFile?.name || audioFileName,
       imageFile,
       imageFileName: imageFile?.name || imageFileName,
+      questions: initialData?.questions || [],
     }
 
     if (onSubmit) {
@@ -72,95 +76,30 @@ export function VocabCreateForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={cn('flex flex-col gap-4', className)}>
+    <form onSubmit={handleSubmit} className={cn('flex min-h-0 flex-1 flex-col', className)}>
       {submitted && (
         <div className="rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-700 dark:text-green-400">
           Lưu từ vựng thành công! Đang quay lại...
         </div>
       )}
+      <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain pr-1">
+        <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs">
+          <h2 className="text-base font-bold text-foreground">Thêm từ vựng</h2>
 
-      <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs">
-        <h2 className="text-base font-bold text-foreground">Thêm từ vựng</h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-12 gap-y-5 md:grid-cols-2 lg:gap-x-16">
-          <div className="flex items-center gap-4">
-            <label
-              htmlFor="vocab-word"
-              className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
-            >
-              Từ vựng
-            </label>
-            <div className="min-w-0 flex-1">
-              <Input
-                id="vocab-word"
-                type="text"
-                value={word}
-                onChange={(e) => setWord(e.target.value)}
-                placeholder=""
-                required
-                className="h-10 border-input bg-card text-sm"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs">
-        <h2 className="text-base font-bold text-foreground">Thông tin từ vựng</h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-12 gap-y-5 md:grid-cols-2 lg:gap-x-16">
-          <div className="flex flex-col gap-5">
+          <div className="mt-6 grid grid-cols-1 gap-x-12 gap-y-5 md:grid-cols-2 lg:gap-x-16">
             <div className="flex items-center gap-4">
               <label
-                htmlFor="vocab-pronunciation"
+                htmlFor="vocab-word"
                 className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
               >
-                Phiên âm
+                Từ vựng
               </label>
               <div className="min-w-0 flex-1">
                 <Input
-                  id="vocab-pronunciation"
+                  id="vocab-word"
                   type="text"
-                  value={pronunciation}
-                  onChange={(e) => setPronunciation(e.target.value)}
-                  placeholder=""
-                  className="h-10 border-input bg-card text-sm"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <label
-                htmlFor="vocab-pos"
-                className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
-              >
-                Từ loại
-              </label>
-              <div className="min-w-0 flex-1">
-                <Input
-                  id="vocab-pos"
-                  type="text"
-                  value={partOfSpeech}
-                  onChange={(e) => setPartOfSpeech(e.target.value)}
-                  placeholder="Từ loại: n, v, adj, adv,..."
-                  className="h-10 border-input bg-card text-sm placeholder:text-muted-foreground/70"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <label
-                htmlFor="vocab-meaning"
-                className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
-              >
-                Nghĩa
-              </label>
-              <div className="min-w-0 flex-1">
-                <Input
-                  id="vocab-meaning"
-                  type="text"
-                  value={meaning}
-                  onChange={(e) => setMeaning(e.target.value)}
+                  value={word}
+                  onChange={(e) => setWord(e.target.value)}
                   placeholder=""
                   required
                   className="h-10 border-input bg-card text-sm"
@@ -168,71 +107,149 @@ export function VocabCreateForm({
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-4">
-              <label
-                htmlFor="vocab-example"
-                className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
-              >
-                Ví dụ
-              </label>
-              <div className="min-w-0 flex-1">
-                <Input
-                  id="vocab-example"
-                  type="text"
-                  value={example}
-                  onChange={(e) => setExample(e.target.value)}
-                  placeholder=""
-                  className="h-10 border-input bg-card text-sm"
-                />
+        <div className="rounded-xl border border-border/50 bg-card p-6 shadow-xs">
+          <h2 className="text-base font-bold text-foreground">Thông tin từ vựng</h2>
+
+          <div className="mt-6 grid grid-cols-1 gap-x-12 gap-y-5 md:grid-cols-2 lg:gap-x-16">
+            <div className="flex flex-col gap-5">
+              <div className="flex items-center gap-4">
+                <label
+                  htmlFor="vocab-pronunciation"
+                  className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
+                >
+                  Phiên âm
+                </label>
+                <div className="min-w-0 flex-1">
+                  <Input
+                    id="vocab-pronunciation"
+                    type="text"
+                    value={pronunciation}
+                    onChange={(e) => setPronunciation(e.target.value)}
+                    placeholder=""
+                    className="h-10 border-input bg-card text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <label
+                  htmlFor="vocab-pos"
+                  className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
+                >
+                  Từ loại
+                </label>
+                <div className="min-w-0 flex-1">
+                  <Input
+                    id="vocab-pos"
+                    type="text"
+                    value={partOfSpeech}
+                    onChange={(e) => setPartOfSpeech(e.target.value)}
+                    placeholder="Từ loại: n, v, adj, adv,..."
+                    className="h-10 border-input bg-card text-sm placeholder:text-muted-foreground/70"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <label
+                  htmlFor="vocab-meaning"
+                  className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
+                >
+                  Nghĩa
+                </label>
+                <div className="min-w-0 flex-1">
+                  <Input
+                    id="vocab-meaning"
+                    type="text"
+                    value={meaning}
+                    onChange={(e) => setMeaning(e.target.value)}
+                    placeholder=""
+                    required
+                    className="h-10 border-input bg-card text-sm"
+                  />
+                </div>
               </div>
             </div>
 
-            <FileInputRow
-              id="vocab-audio"
-              label="Âm thanh"
-              placeholder="Chọn tệp"
-              accept="audio/*"
-              file={audioFile}
-              fileName={audioFileName}
-              onChange={(file) => {
-                setAudioFile(file)
-                if (file) setAudioFileName(file.name)
-              }}
-            />
+            <div className="flex flex-col gap-5">
+              <div className="flex items-center gap-4">
+                <label
+                  htmlFor="vocab-example"
+                  className="w-24 shrink-0 text-sm font-semibold text-foreground select-none"
+                >
+                  Ví dụ
+                </label>
+                <div className="min-w-0 flex-1">
+                  <Input
+                    id="vocab-example"
+                    type="text"
+                    value={example}
+                    onChange={(e) => setExample(e.target.value)}
+                    placeholder=""
+                    className="h-10 border-input bg-card text-sm"
+                  />
+                </div>
+              </div>
 
-            <FileInputRow
-              id="vocab-image"
-              label="Ảnh"
-              placeholder="Chọn tệp"
-              accept="image/*"
-              file={imageFile}
-              fileName={imageFileName}
-              onChange={(file) => {
-                setImageFile(file)
-                if (file) setImageFileName(file.name)
-              }}
-            />
+              <FileInputRow
+                id="vocab-audio"
+                label="Âm thanh"
+                placeholder="Chọn tệp"
+                accept="audio/*"
+                file={audioFile}
+                fileName={audioFileName}
+                onChange={(file) => {
+                  setAudioFile(file)
+                  if (file) setAudioFileName(file.name)
+                }}
+              />
+
+              <FileInputRow
+                id="vocab-image"
+                label="Ảnh"
+                placeholder="Chọn tệp"
+                accept="image/*"
+                file={imageFile}
+                fileName={imageFileName}
+                onChange={(file) => {
+                  setImageFile(file)
+                  if (file) setImageFileName(file.name)
+                }}
+              />
+            </div>
           </div>
         </div>
+        <section className="rounded-xl border border-border/50 bg-card p-6 shadow-xs">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-base font-bold text-foreground">Bài tập của từ vựng</h2>
+              <p className="mt-1 text-sm text-muted-foreground">Thêm bài tập với nội dung và loại bài tập riêng.</p>
+            </div>
+            <Button type="button" variant="outline" onClick={addQuestion} className="h-9">
+              + Thêm bài tập của từ vựng
+            </Button>
+          </div>
+        </section>
+        <div className="mt-8 flex items-center justify-end gap-3">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleCancel}
+            className="h-10 cursor-pointer border-border px-6 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            Hủy
+          </Button>
+          <Button
+            type="submit"
+            className="h-10 cursor-pointer bg-primary px-6 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90"
+          >
+            Lưu từ vựng
+          </Button>
+        </div>
       </div>
-      <div className="mt-8 flex items-center justify-end gap-3">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={handleCancel}
-          className="h-10 cursor-pointer border-border px-6 text-sm font-medium transition-colors hover:bg-muted"
-        >
-          Hủy
-        </Button>
-        <Button
-          type="submit"
-          className="h-10 cursor-pointer bg-primary px-6 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90"
-        >
-          Lưu từ vựng
-        </Button>
-      </div>
+
     </form>
   )
 }

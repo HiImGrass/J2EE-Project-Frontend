@@ -15,6 +15,12 @@ function readTheme(): Theme {
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle('dark', theme === 'dark')
   document.documentElement.style.colorScheme = theme
+
+  // The browser uses this color for its mobile browser chrome/status area.
+  // Read the CSS token so it always follows the active light/dark primary.
+  const primary = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+  if (primary && themeColor) themeColor.content = primary
 }
 
 interface ThemeState {

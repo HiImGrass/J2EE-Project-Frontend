@@ -10,6 +10,7 @@ import AdminLearningPathPage from '@/pages/admin-pages/AdminLearningPathPage'
 import AdminTopicPage from '@/pages/admin-pages/AdminTopicPage'
 import AdminVocabPage from '@/pages/admin-pages/AdminVocabPage'
 import AdminVocabCreatePage from '@/pages/admin-pages/AdminVocabCreatePage'
+import AdminVocabQuestionCreatePage from '@/pages/admin-pages/AdminVocabQuestionCreatePage'
 import { ClassPage } from '@/pages/client-pages/ClassPage'
 import { HeaderOnlyLayout } from '@/layouts/HeaderOnlyLayout'
 import { JoinClassPage } from '@/pages/client-pages/JoinClassPage'
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
                   {
                     path: 'learning-paths/:id/topics/:topicId/vocabularies/create',
                     element: <AdminVocabCreatePage />,
+                  },
+                  {
+                    path: 'learning-paths/:id/topics/:topicId/vocabularies/create/question/create',
+                    element: <AdminVocabQuestionCreatePage />,
                   },
                   { path: 'accounts', element: <AdminAccount /> },
                   { path: 'classes', element: <AdminClassPage /> },

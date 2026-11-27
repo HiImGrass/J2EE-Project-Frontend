@@ -1,3 +1,5 @@
+import type { QuestionType } from './question.type'
+
 export interface LearningPath {
   id: number
   name: string
@@ -37,4 +39,14 @@ export interface CreateVocabularyRequest {
   audioFileName?: string
   imageFile?: File | null
   imageFileName?: string
+  questions?: CreateVocabularyQuestionRequest[]
+}
+/** Question fields submitted together with a newly created vocabulary. */
+export interface CreateVocabularyQuestionRequest {
+  title: string
+  type: QuestionType
+  isNewWordQuestion: boolean
+  questionContent: string | null
+  questionAudioUrl: string | null
+  correctWord: string | null
 }
