@@ -40,7 +40,7 @@ export function LearningPathCard({
           onClick={() => onViewDetail?.(learningPath.id)}
           className="font-medium text-primary-text transition-colors duration-150 hover:underline"
         >
-          Xem Chi tiết
+          Xem chi tiết
         </button>
         <button
           onClick={() => onEdit?.(learningPath.id)}
